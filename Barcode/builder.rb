@@ -1,0 +1,31 @@
+module Aspose
+  module Cloud
+    module Barcode
+      class Builder
+        def initialize()
+          #nothing
+        end
+
+        def save code_text, symbology, image_format, x_resolution, y_resolution, x_dimension, y_dimension
+          begin
+            str_uri = $product_uri + '/barcode/generate?text=' + code_text.to_s + '&type=' + symbology.to_s + '&format=' + image_format.to_s +
+              (x_resolution <= 0 ? '' : '&resolutionX=' + x_resolution.to_s) +
+              (y_resolution <=0 ? '' : '&resolutionY=' + y_resolution.to_s) +
+              (x_dimension <= 0 ? '' : '&dimensionX=' + x_dimension.to_s) +
+              (y_dimension <= 0 ? '' : '&dimensionY=' + y_dimension.to_s)
+            signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
+            response = RestClient.get(signed_uri,:accept => 'application/json')
+            output_path = $out_put_location + 'barcode' + symbology.to_s + '.' + image_format.to_s
+            Aspose::Cloud::Common::Utils.save_file(response, output_path)
+            return output_path
+          rescue Exception=>e
+            print e
+          end
+
+        end
+      end
+    end
+
+  end
+end
+

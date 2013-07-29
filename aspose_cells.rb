@@ -1,0 +1,7 @@
+require_relative 'aspose_storage'
+require_relative 'Cells/convertor'
+require_relative 'Cells/chart_editor'
+require_relative 'Cells/extractor'
+require_relative 'Cells/text_editor'
+require_relative 'Cells/workbook'
+require_relative 'Cells/worksheet'

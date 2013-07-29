@@ -1,0 +1,6 @@
+require_relative 'aspose_storage'
+require_relative 'Pdf/converter'
+require_relative 'Pdf/extractor'
+require_relative 'Pdf/text_editor'
+require_relative 'Pdf/annotation_editor'
+require_relative 'Pdf/document'
