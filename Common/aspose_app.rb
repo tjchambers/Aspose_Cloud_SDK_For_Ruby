@@ -6,7 +6,7 @@ module Aspose
         def initialize(app_sid,app_key)  
           $app_sid = app_sid
           $app_key = app_key      
-          $out_put_location = 'E:\\'
+          $out_put_location = ''
         end
       end
     end
