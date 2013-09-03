@@ -66,6 +66,6 @@ The Aspose Cloud SDK for Ruby allows you to save the output files at your specif
 
 You may get help regarding Aspose API or Aspose Cloud SDK for Ruby on [www.Aspose.com](http://www.Aspose.com).
 
-##How to use Aspose.SDK for Ruby?
+##How to use Aspose Cloud SDK for Ruby?
 
 Aspose for Cloud products: http://www.aspose.com/cloud/total-api.aspx
