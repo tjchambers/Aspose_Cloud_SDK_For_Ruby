@@ -11,7 +11,7 @@ module Aspose
             if @filenmae == ''
               raise 'Base file is not specified'
             end
-            str_uri = $product_uri + '/barcode/' + @filename + '/recognize?' + (symbology <= 0 ? 'type=' : 'type=' + symbology.to_s)
+            str_uri = $product_uri + '/barcode/' + @filename + '/recognize?' + (symbology.length <= 0 ? 'type=' : 'type=' + symbology.to_s)
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
             response = RestClient.get(signed_uri,:accept => 'application/json')
             json = JSON.parse(response)
