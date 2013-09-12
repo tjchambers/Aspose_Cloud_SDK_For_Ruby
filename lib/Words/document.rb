@@ -30,10 +30,17 @@ module Aspose
             str_uri = $product_uri + '/words/' + @filename + '/appendDocument'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
         
-            post_hash = Hash['DocumentEntries',append_docs];                                
-            json_data = post_hash.to_json
+            objs = []
+            
+            i = 0
+            append_docs.each do |val|
+              objs << { "Href" => source_folder.empty?? val : source_folder + "\\" + val , "ImportFormatMode"=> import_format_modes[i] }
+              i = i+1
+            end
+            
+            json_data = JSON.generate( { "DocumentEntries" => objs } )
         
-            response_stream = RestClient.post(signed_str_uri,json_data,{:accept=>'application/json'})
+            response_stream = RestClient.post(signed_str_uri,json_data,{:content_type => :json})
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
