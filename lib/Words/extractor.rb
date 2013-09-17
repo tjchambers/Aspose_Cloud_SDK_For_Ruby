@@ -148,7 +148,7 @@ module Aspose
               raise 'Render Format not specified.'
             end
         
-            str_uri = $product_uri + '/words/' + @filename + '/drawingObjects/' + index.to_s + '/imagedata'
+            str_uri = $product_uri + '/words/' + @filename + '/drawingObjects/' + index.to_s  + '?format=' + render_format
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
         
             response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
