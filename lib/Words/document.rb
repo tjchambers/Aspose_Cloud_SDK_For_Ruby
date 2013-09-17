@@ -159,12 +159,12 @@ module Aspose
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
         
-            response_stream = RestClient.put(signed_str_uri,json_data,{:accept=>'application/json'})
+            response_stream = RestClient.put(signed_str_uri,json_data,{:content_type=>:json})
         
-            stream_hash = JSON.parse(response_stream)
+            xmldoc = REXML::Document.new(response_stream)                        
         
-            if(stream_hash['Code'] == 200)
-              return stream_hash['DocumentProperty']
+            if(xmldoc.elements.to_a('SaaSposeResponse/Status').first.text == 'OK')
+              return xmldoc.elements.to_a('SaaSposeResponse/DocumentProperty')
             else
               return false
             end
