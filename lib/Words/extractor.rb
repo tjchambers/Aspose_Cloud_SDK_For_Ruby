@@ -247,7 +247,7 @@ module Aspose
               end
           
               signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-          
+              response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
               valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
           
               if valid_output == ''                    
