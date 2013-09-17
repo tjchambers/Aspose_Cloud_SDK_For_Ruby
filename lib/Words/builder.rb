@@ -36,7 +36,7 @@ module Aspose
             post_hash = { 'Text' => text, 'RotationAngle'=>rotation_angle}
             json_data = post_hash.to_json
         
-            response_stream = RestClient.post(signed_str_uri,json_data,{:accept=>'application/json'})
+            response_stream = RestClient.post(signed_str_uri,json_data,{:content_type => :json})
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
@@ -82,7 +82,7 @@ module Aspose
             str_uri = $product_uri + '/words/' + @filename + '/insertWatermarkImage?imageFile=' + image_file.to_s + '&rotationAngle=' + rotation_angle.to_s
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)                
         
-            response_stream = RestClient.post(signed_str_uri,'',{:accept=>'application/json'})
+            response_stream = RestClient.post(signed_str_uri,'',{:content_type => :json})
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
