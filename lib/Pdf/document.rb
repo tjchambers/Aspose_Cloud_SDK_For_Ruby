@@ -44,9 +44,9 @@ module Aspose
             end       
         
             if sourcefolder == ''
-              struri = "#{$product_uri}/pdf/#{base_pdf}/appenddocument?appendfile=#{new_pdf}"+(startpage > 0 ? '&startPage=' + startpage : '' )  + (endpage > 0 ? '&endPage=' + endpage : '' )          
+              struri = "#{$product_uri}/pdf/#{base_pdf}/appenddocument?appendfile=#{new_pdf}"+(startpage > 0 ? '&startPage=' + startpage.to_str : '' )  + (endpage > 0 ? '&endPage=' + endpage : '' )          
             else
-              struri = "#{$product_uri}/pdf/#{base_pdf}/appenddocument?appendfile=#{sourcefolder}/#{new_pdf}"+ (startpage > 0 ? '&startPage=' + startpage : '' )  + (endpage > 0 ? '&endPage=' + endpage : '' )
+              struri = "#{$product_uri}/pdf/#{base_pdf}/appenddocument?appendfile=#{sourcefolder}/#{new_pdf}"+ (startpage > 0 ? '&startPage=' + startpage.to_str : '' )  + (endpage > 0 ? '&endPage=' + endpage : '' )
             end
         
             signeduri = Aspose::Cloud::Common::Utils.sign(struri)
