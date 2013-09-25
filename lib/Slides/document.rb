@@ -133,7 +133,7 @@ module Aspose
             end
         
         
-            str_uri = $product_uri + '/slides/' + @filename + '/slides/'
+            str_uri = $product_uri + '/slides/' + @filename + '/slides'
             if !folder_name.empty?
               str_uri += '?folder=' + folder_name
             end
