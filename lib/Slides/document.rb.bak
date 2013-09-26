@@ -470,7 +470,7 @@ module Aspose
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
             if valid_output == ''                              
-              output_path = $out_put_location + Aspose::Cloud::Common::Utils.get_filename(@filename) + '_' + slide_number.to_s + '.' + output_format
+              output_path = $out_put_location + Aspose::Cloud::Common::Utils.get_filename(@filename) + '.' + output_format
               Aspose::Cloud::Common::Utils.save_file(response_stream,output_path)
               return ''
             else
