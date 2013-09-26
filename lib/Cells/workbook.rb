@@ -296,7 +296,8 @@ module Aspose
             json_data = fields_array.to_json
             str_uri = $product_uri + '/cells/' + @filename + '/protection'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.delete(signed_uri,json_data,:accept=>'application/json')
+            response = Aspose::Cloud::Common::Utils.process_command(signed_uri,'DELETE','JSON',json_data)
+            
             json = JSON.parse(response)
             if json['Code']==200
               return true

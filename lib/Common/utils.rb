@@ -12,15 +12,20 @@ module Aspose
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
           
           if method == 'GET'
-            request = NET::HTTP::Get.new(url)
+            request = Net::HTTP::Get.new(url)
+          elsif method == 'DELETE'
+            request = Net::HTTP::Delete.new(url)
           elsif method == 'POST'
             request = Net::HTTP::Post.new(url)            
+          end
+          
+          if src != ''
             request.body = src
           end
           
           if header_type == 'XML'
             request.add_field('Content-Type', 'application/xml')
-          else
+          elsif header_type == 'JSON'
             request.add_field('Content-Type', 'application/json')
           end
           
