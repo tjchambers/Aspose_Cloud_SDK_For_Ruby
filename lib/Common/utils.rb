@@ -3,6 +3,33 @@ module Aspose
   module Cloud
     module Common
       class Utils
+        
+        def self.process_command(url,method='GET',header_type='XML',src='')
+          
+          uri = URI.parse(url)
+          http = Net::HTTP.new(uri.host, uri.port)
+          http.use_ssl = false
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          
+          if method == 'GET'
+            request = NET::HTTP::Get.new(url)
+          elsif method == 'POST'
+            request = Net::HTTP::Post.new(url)            
+            request.body = src
+          end
+          
+          if header_type == 'XML'
+            request.add_field('Content-Type', 'application/xml')
+          else
+            request.add_field('Content-Type', 'application/json')
+          end
+          
+          response = http.request(request)
+          
+          return response.body
+          
+        end
+        
         # Signs a URI with your appSID and Key.
         # * :url describes the URL to sign
    

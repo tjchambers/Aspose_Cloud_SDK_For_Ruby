@@ -273,16 +273,9 @@ module Aspose
             str_uri = $product_uri + '/cells/' + @filename + '/protection'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
             
-            uri = URI.parse(str_uri)
-            http = Net::HTTP.new(uri.host, uri.port)
-            http.use_ssl = false
-            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-            request = Net::HTTP::Post.new(signed_uri)
-            request.add_field('Content-Type', 'application/json')
-            request.body = json_data
-            response = http.request(request)
+            response = Aspose::Cloud::Common::Utils.process_command(signed_uri,'POST','JSON',json_data)            
                         
-            json = JSON.parse( response.body )
+            json = JSON.parse( response )
             if json['Code']==200
               return true
             else
