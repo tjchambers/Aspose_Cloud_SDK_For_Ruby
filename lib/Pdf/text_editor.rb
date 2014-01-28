@@ -171,7 +171,7 @@ module Aspose
         
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
         
-            response_stream = RestClient.post(str_signed_uri,json_data,{:accept=>'application/json'})  
+            response_stream = RestClient.post(str_signed_uri,json_data,{:content_type=>'application/json',:accept=>'application/json'})  
                
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
