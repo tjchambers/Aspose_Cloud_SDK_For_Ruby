@@ -5,7 +5,7 @@ module Aspose
 
     module Words
       class Document
-        def initialize(filename)
+        def initialize filename
           @filename = filename
         end
 
@@ -14,7 +14,7 @@ module Aspose
   @param string append_docs
   @param import_format_modes
   @param source_folder
-=end     
+=end
 
         def append_document append_docs, import_format_modes, source_folder
           begin
@@ -26,22 +26,22 @@ module Aspose
             if append_docs.length != import_format_modes.length
               raise 'Please specify complete documents and import format modes.'
             end
-        
+
             str_uri = $product_uri + '/words/' + @filename + '/appendDocument'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
+
             objs = []
-            
+
             i = 0
             append_docs.each do |val|
-              objs << { "Href" => source_folder.empty?? val : source_folder + "\\" + val , "ImportFormatMode"=> import_format_modes[i] }
+              objs << {"Href" => source_folder.empty? ? val : source_folder + "\\" + val, "ImportFormatMode" => import_format_modes[i]}
               i = i+1
             end
-            
-            json_data = JSON.generate( { "DocumentEntries" => objs } )
-        
-            response_stream = RestClient.post(signed_str_uri,json_data,{:content_type => :json})
-        
+
+            json_data = JSON.generate({'DocumentEntries' => objs})
+
+            response_stream = RestClient.post(signed_str_uri, json_data, {:content_type => :json})
+
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
             if valid_output == ''                              
@@ -63,13 +63,13 @@ module Aspose
             print e
           end
         end
-    
+
 =begin
    Get Resource Properties information like document source format, IsEncrypted, IsSigned and document properties   
-=end     
-    
+=end
+
         def get_document_info
-      
+
           begin
         
             if @filename == ''
@@ -87,16 +87,16 @@ module Aspose
           rescue Exception => e
             print e
           end
-      
+
         end
-    
+
 =begin
    Get Resource Properties information like document source format, IsEncrypted, IsSigned and document properties
    @param string property_name
-=end     
-    
+=end
+
         def get_property property_name
-      
+
           begin
         
             if @filename == ''
@@ -106,7 +106,7 @@ module Aspose
             if property_name == ''
               raise 'Property name not specified.'
             end
-        
+
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
         
@@ -123,17 +123,17 @@ module Aspose
           rescue Exception=>e
             print e
           end
-      
+
         end
 
 =begin
    Set document property
    @param string property_name
    @param string property_value
-=end     
-    
+=end
+
         def set_property property_name, property_value
-      
+
           begin
         
             if @filename == ''
@@ -167,16 +167,16 @@ module Aspose
           rescue Exception=>e
             print e
           end
-      
-        end    
+
+        end
 
 =begin
    Delete a document property
    @param string property_name
-=end     
-    
+=end
+
         def delete_property property_name
-      
+
           begin
         
             if @filename == ''
@@ -198,15 +198,15 @@ module Aspose
           rescue Exception => e
             print e
           end
-      
+
         end
 
 =begin
    Get Document's properties
-=end     
-    
+=end
+
         def get_properties
-      
+
           begin
         
             if @filename == ''
@@ -229,8 +229,8 @@ module Aspose
           rescue Exception=>e
             print e
           end
-      
-        end    
+
+        end
 
 =begin
      Convert Word to different file format without using storage
@@ -238,8 +238,8 @@ module Aspose
      @param string outputFilename
      @param string outputFormat
 =end
-    
-        def convert_local_file input_file,output_filename,output_format
+
+        def convert_local_file input_file, output_filename, output_format
           begin
         
             if input_file == ''
@@ -256,9 +256,9 @@ module Aspose
         
             str_uri = $product_uri + '/words/convert?format=' + output_format
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = Aspose::Cloud::Common::Utils.upload_file_binary(input_file, str_signed_uri)                
-        
+
+            response_stream = Aspose::Cloud::Common::Utils.upload_file_binary(input_file, str_signed_uri)
+
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
             if valid_output == ''
@@ -287,6 +287,6 @@ module Aspose
     
       end
     end
-    
+
   end
 end
