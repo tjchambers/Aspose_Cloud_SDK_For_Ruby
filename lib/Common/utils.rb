@@ -49,14 +49,14 @@ module Aspose
           signature = Base64.strict_encode64(raw_signature).tr('+/', '-_')
 
           #remove invalid character 
-          signature = signature.gsub(/[=_-]/,'=' => '','_' => '%2f','-' => '%2b')
+          signature = signature.gsub(/[=_-]/, '=' => '', '_' => '%2f', '-' => '%2b')
 
           #Define expression
           pat = Regexp.new('%[0-9a-f]{2}')
 
           #Replace the portion matched to the above pattern to upper case
-          for i in 0..5
-            signature = signature.sub(pat,pat.match(signature).to_s.upcase)
+          6.times do
+            signature = signature.sub(pat, pat.match(signature).to_s.upcase)
           end
 
           # prepend the server and append the signature.
