@@ -63,10 +63,10 @@ module Aspose
             str_url += remote_folder_path
           end
           signed_uri = Aspose::Cloud::Common::Utils.sign(str_url)
-          response = RestClient.get(signed_uri, :accept=>'application/json')
-      
-          result = JSON.parse(response)
-          return result['Files']
+          response = RestClient.get(signed_uri, :accept => 'application/json')
+
+          JSON.parse(response)['Files']
+
           #      urlFolder = $product_uri + '/storage/folder'
           #      urlFile = ''
           #      urlExist = ''
