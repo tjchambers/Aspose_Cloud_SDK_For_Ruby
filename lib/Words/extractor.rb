@@ -6,6 +6,7 @@ module Aspose
       class Extractor
         def initialize filename
           @filename = filename
+          raise 'Base file not specified.' if @filename.empty?
         end
 
 =begin
@@ -15,11 +16,6 @@ module Aspose
         def get_text
 
           begin
-
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-
             str_uri = $product_uri + '/words/' + @filename + '/textItems'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
@@ -48,10 +44,6 @@ module Aspose
         def get_ole_data index, ole_format
 
           begin
-
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
 
             if index == ''
               raise 'Index not specified.'
@@ -91,10 +83,6 @@ module Aspose
         def get_image_data index, render_format
 
           begin
-
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
 
             if index == ''
               raise 'Index not specified.'
@@ -136,10 +124,6 @@ module Aspose
 
           begin
 
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-
             if index == ''
               raise 'Index not specified.'
             end
@@ -177,11 +161,6 @@ module Aspose
         def get_drawing_object_list
 
           begin
-
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-
             str_uri = $product_uri + '/words/' + @filename + '/drawingObjects'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
@@ -210,10 +189,6 @@ module Aspose
         def get_drawing_object object_uri, output_path
 
           begin
-
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
 
             if object_uri == ''
               raise 'Object URI not specified.'
@@ -277,10 +252,6 @@ module Aspose
         def get_drawing_objects output_path
 
           begin
-
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
 
             if output_path == ''
               raise 'Output path not specified.'
