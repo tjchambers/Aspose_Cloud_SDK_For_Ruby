@@ -193,14 +193,9 @@ module Aspose
             response_stream = RestClient.delete(signed_str_uri,{:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-              return true
-            else
-              return false
-            end
-        
-          rescue Exception=>e
+            stream_hash['Code'] == 200
+
+          rescue Exception => e
             print e
           end
       
