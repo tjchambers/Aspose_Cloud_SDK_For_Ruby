@@ -93,9 +93,8 @@ module Aspose
             raise('Filename cannot be empty') if filename.empty?
 
             str_uri = @str_uri_exist + filename
-            unless storage_name.empty?
-              str_uri += '?storage=' + storage_name
-            end
+            str_uri += '?storage=' + storage_name unless storage_name.empty?
+
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
             response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
