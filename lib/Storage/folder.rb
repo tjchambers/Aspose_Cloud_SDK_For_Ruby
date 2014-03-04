@@ -90,7 +90,7 @@ module Aspose
         def file_exists(filename, storage_type = 'Aspose', storage_name = '')
           begin
 
-            raise('Filename cannot be empty') if  filename.empty?
+            raise('Filename cannot be empty') if filename.empty?
 
             str_uri = @str_uri_exist + filename
             unless storage_name.empty?
@@ -108,11 +108,9 @@ module Aspose
 
         def delete_file(filename, storage_type = 'Aspose', storage_name = '')
           begin
-        
-            if(filename == '')
-              raise('Filename cannot be empty')
-            end                
-        
+
+            raise 'File name cannot be empty' if filename.empty?
+
             str_uri = @str_uri_file + filename
             if(!storage_name.empty?)
               str_uri += '?storage=' + storage_name
@@ -136,9 +134,7 @@ module Aspose
    
         def create_folder (folder_name,storage_type = 'Aspose',storage_name='')
           begin
-            if folder_name==''
-              raise 'Filename cannot be empty'
-            end
+            raise 'Folder name cannot be empty' if folder_name.empty?
             str_uri = @str_uri_folder + folder_name
             if(!storage_name.empty?)
               str_uri += '?storage=' + storage_name
@@ -151,12 +147,12 @@ module Aspose
             print e
           end
         end
-    
+
         def delete_folder (folder_name)
           begin
-            if folder_name==''
-              raise 'Filename cannot be empty'
-            end
+
+            raise 'Folder name cannot be empty' if folder_name.empty?
+
             str_uri = @str_uri_folder + folder_name
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
             response = RestClient.delete(signed_uri, :accept=>'application/json')
@@ -188,9 +184,9 @@ module Aspose
         # Get file from Aspose server
         def get_file (file_name,storage_type = 'Aspose',storage_name='')
           begin
-            if file_name==''
-              raise 'Filename cannot be empty'
-            end
+
+            raise 'Filename cannot be empty' if file_name.empty?
+
             str_uri = @str_uri_file + file_name
             if(!storage_name.empty?)
               str_uri += '?storage=' + storage_name
@@ -204,6 +200,6 @@ module Aspose
         end
 
       end #Class Ends Here
-    end    
+    end
   end
 end
