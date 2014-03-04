@@ -63,7 +63,7 @@ module Aspose
           url_to_sign + "&signature=#{signature}"
 
         end
-   
+
         def self.validate_output(result)
 
           validate = ['Unknown file format.',
@@ -93,34 +93,35 @@ module Aspose
         # Uploads a binary file from the client system
         # * :localfile holds the local file path along with name
         # * :url holds the required url to use while uploading the file to Aspose Storage		 
-        def self.upload_file_binary(localfile,url)
-          RestClient.put( url,File.new(localfile, 'rb'))
+        def self.upload_file_binary(localfile, url)
+          RestClient.put(url, File.new(localfile, 'rb'))
         end
 
         # Gets the count of a particular field in the response
         # * :localfile holds the local file path along with name
         # * :url holds the required url to use while uploading the file to Aspose Storage		 		 
-        def self.get_field_count(url,field_name)	    
+        def self.get_field_count(url, field_name)
           response = RestClient.get(url, :accept => 'application/xml')
           doc = REXML::Document.new(response.body)
-          pages = []		
+          pages = []
           doc.elements.each(field_name) do |ele|
             pages << ele.text
           end
           pages.size
         end
+
         # Saves the response stream to a local file.
-        def self.save_file(response_stream,local_file)
+        def self.save_file(response_stream, local_file)
           open(local_file, 'wb') do |file|
             file.write(response_stream.body)
           end
         end
-   
+
         def self.get_filename(file)
           File.basename(file, File.extname(file))
         end
-   
+
       end
-    end    
+    end
   end
 end
