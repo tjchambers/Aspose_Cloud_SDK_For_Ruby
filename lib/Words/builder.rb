@@ -7,6 +7,7 @@ module Aspose
       class Builder
         def initialize filename
           @filename = filename
+          raise 'Base file not specified.' if @filename.empty?
         end
 
 =begin
@@ -18,10 +19,6 @@ module Aspose
         def insert_watermark_text text, rotation_angle
 
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
         
             if text == ''
               raise 'Text not specified.'
@@ -67,10 +64,6 @@ module Aspose
 
           begin
         
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
             if image_file == ''
               raise 'Image file not specified.'
             end
@@ -114,10 +107,6 @@ module Aspose
         def replace_text old_value, new_value, is_match_case, is_match_whole_word
 
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
         
             if old_value == ''
               raise 'Old value not specified.'
