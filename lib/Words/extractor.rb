@@ -22,12 +22,7 @@ module Aspose
             response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-              return stream_hash['TextItems']['List']
-            else
-              return false
-            end
+            stream_hash['Code'] == 200 ? stream_hash['TextItems']['List'] : false
 
           rescue Exception => e
             print e
@@ -167,12 +162,7 @@ module Aspose
             response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-              return stream_hash['DrawingObjects']['List']
-            else
-              return false
-            end
+            stream_hash['Code'] == 200 ? stream_hash['DrawingObjects']['List'] : false
 
           rescue Exception => e
             print e
@@ -263,17 +253,11 @@ module Aspose
             response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-          
-              stream_hash['DrawingObjects']['List'].each { |object| 
-          
-                self.get_drawing_object(object['link']['Href'], output_path)
-            
-              }
-          
-            else
-              return false
+
+            return false unless stream_hash['Code'] == 200
+
+            stream_hash['DrawingObjects']['List'].each do |object|
+              self.get_drawing_object(object['link']['Href'], output_path)
             end
 
           rescue Exception => e
