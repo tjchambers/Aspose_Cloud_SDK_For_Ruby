@@ -3,62 +3,58 @@ module Aspose
 
     module AsposeStorage
       # This class provides functionality to manage files in a Remote Aspose Folder
-      class Folder        
-    
+      class Folder
+
         def initialize
           @str_uri_folder = $product_uri + '/storage/folder'
           @str_uri_file = $product_uri + '/storage/file/'
           @str_uri_exist = $product_uri + '/storage/exist/'
           @str_uri_disc = $product_uri + '/storage/disc/'
         end
-    
+
         # Uploads file from the local path to the remote folder.
         # * :localFilePath represents full local file path and name
         # * :remoteFolderPath represents remote folder relative to the root. Pass empty string for the root folder.		 
-        def upload_file(local_file,remote_folder='',storage_type='Aspose',storage_name='')
-      
+        def upload_file(local_file, remote_folder='', storage_type='Aspose', storage_name='')
+
           begin
-        
-            if local_file == ''
-              raise('Local file not specified')
-            end
-                
-        
-            if(storage_type == 'Aspose')
-          
+
+            raise 'Local file not specified' if local_file.empty?
+
+            if storage_type == 'Aspose'
+
               filename = File.basename(local_file)
-          
+
               if remote_folder.empty?
                 struri = $product_uri + '/storage/file/' + filename
               else
                 struri = $product_uri + '/storage/file/' + remote_folder + '/' + filename
               end
-          
+
               signeduri = Aspose::Cloud::Common::Utils.sign(struri)
-          
+
             else
-          
+
               filename = File.basename(local_file)
-          
+
               if remote_folder.empty?
                 struri = $product_uri + '/storage/file/' + filename + '?storage=' + storage_name
               else
                 struri = $product_uri + '/storage/file/' + remote_folder + '/' + filename + '?storage=' + storage_name
               end
-                    
+
               signeduri = Aspose::Cloud::Common::Utils.sign(struri)
-          
+
             end
-        
-            Aspose::Cloud::Common::Utils.upload_file_binary(local_file,signeduri)	
-        
-          rescue Exception=>e
+
+            Aspose::Cloud::Common::Utils.upload_file_binary(local_file, signeduri)
+
+          rescue Exception => e
             print e
-          end            
+          end
         end
-    
-    
-      
+
+
         # Retrieves Files and Folder information from a remote folder. The method returns an Array of AppFile objects.
         # * :remoteFolderPath represents remote folder relative to the root. Pass empty string for the root folder.
         def get_files(remote_folder_path)
@@ -92,13 +88,12 @@ module Aspose
           #      end
           #      return apps	 
         end
-    
-        def file_exists(filename,storage_type = 'Aspose' , storage_name = '')
+
+        def file_exists(filename, storage_type = 'Aspose', storage_name = '')
           begin
-            if(filename == '')
-              raise('Filname cannot be empty')
-            end
-        
+
+            raise('Filename cannot be empty') if  filename.empty?
+
             str_uri = @str_uri_exist + filename
             if(!storage_name.empty?)
               str_uri += '?storage=' + storage_name
