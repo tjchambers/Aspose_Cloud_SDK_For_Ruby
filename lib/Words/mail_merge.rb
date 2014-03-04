@@ -7,6 +7,7 @@ module Aspose
       class MailMerge
         def initialize filename
           @filename = filename
+          raise 'Base file not specified.' if filename.empty?
         end
     
 =begin
@@ -18,16 +19,11 @@ module Aspose
         def execute_mail_merge str_xml
       
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
+
             if str_xml == ''
               raise 'XML not specified.'
             end
-        
-                
+
             str_uri = $product_uri + '/words/' + @filename + '/executeMailMerge'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
                 
@@ -63,11 +59,7 @@ module Aspose
         def execute_mail_merge_with_regions str_xml
       
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
+
             if str_xml == ''
               raise 'XML not specified.'
             end
@@ -105,11 +97,7 @@ module Aspose
         def execute_template str_xml
       
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
+
             if str_xml == ''
               raise 'XML not specified.'
             end
