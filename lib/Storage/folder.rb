@@ -156,8 +156,8 @@ module Aspose
             print e
           end
         end
-    
-        def get_disc_usage (storage_type = 'Aspose',storage_name='')
+
+        def get_disc_usage (storage_type = 'Aspose', storage_name = '')
           begin
             str_uri = @str_uri_disc
             str_uri += '?storage=' + storage_name unless storage_name.empty?
