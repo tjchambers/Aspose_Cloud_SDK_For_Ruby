@@ -53,9 +53,9 @@ module Aspose
             response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
-        
-            if valid_output == ''                    
-          
+
+            if valid_output == ''
+
               output_path = $out_put_location + Aspose::Cloud::Common::Utils.get_filename(@filename) + '_' + index.to_s + '.' + ole_format
               Aspose::Cloud::Common::Utils.save_file(response_stream, output_path)
               return output_path
@@ -93,9 +93,9 @@ module Aspose
             response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
-        
-            if valid_output == ''                    
-          
+
+            if valid_output == ''
+
               output_path = $out_put_location + Aspose::Cloud::Common::Utils.get_filename(@filename) + '_' + index.to_s + '.' + render_format
               Aspose::Cloud::Common::Utils.save_file(response_stream, output_path)
               return output_path
@@ -197,9 +197,9 @@ module Aspose
             response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-          
+
+            if stream_hash['Code'] == 200
+
               if stream_hash['DrawingObject']['ImageDataLink'] != ''
                 str_uri = str_uri + '/imageData'
                 output_path = output_path + '\\DrawingObject_' + object_index.to_s + '.jpeg'
@@ -210,15 +210,15 @@ module Aspose
                 str_uri = str_uri + '?format=jpeg'
                 output_path = output_path + '\\DrawingObject_' + object_index.to_s + '.jpeg'
               end
-          
-              signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-              response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
-              valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
-          
-              if valid_output == ''                    
 
-                #            output_path = $out_put_location + Aspose::Cloud::Common::Utils.get_filename(@filename) + '_' + index.to_s + '.' + render_format
-                Aspose::Cloud::Common::Utils.save_file(response_stream,output_path)
+              signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
+              response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+              valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
+
+              if valid_output == ''
+
+                # output_path = $out_put_location + Aspose::Cloud::Common::Utils.get_filename(@filename) + '_' + index.to_s + '.' + render_format
+                Aspose::Cloud::Common::Utils.save_file(response_stream, output_path)
                 return output_path
               else
                 return valid_output
