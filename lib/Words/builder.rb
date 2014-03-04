@@ -8,15 +8,15 @@ module Aspose
         def initialize filename
           @filename = filename
         end
-    
+
 =begin
    Inserts water mark text into the document.
    @param string text
    @param string rotation_angle
-=end     
-    
+=end
+
         def insert_watermark_text text, rotation_angle
-      
+
           begin
         
             if @filename == ''
@@ -61,10 +61,10 @@ module Aspose
    Inserts water mark image into the document.
    @param string image_file
    @param string rotation_angle
-=end     
-    
+=end
+
         def insert_watermark_image image_file, rotation_angle
-      
+
           begin
         
             if @filename == ''
@@ -94,25 +94,25 @@ module Aspose
               return ''
             else
               return valid_output
-            end        
-        
-        
-          rescue Exception=>e
+            end
+
+
+          rescue Exception => e
             print e
           end
-      
+
         end
-    
+
 =begin
    Replace a text with the new value in the document
    @param string old_value
    @param string new_value
    @param string is_match_case
    @param string is_match_whole_word   
-=end     
-    
+=end
+
         def replace_text old_value, new_value, is_match_case, is_match_whole_word
-      
+
           begin
         
             if @filename == ''
@@ -132,7 +132,7 @@ module Aspose
             str_uri = $product_uri + '/words/' + @filename + '/replaceText'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)                
             response_stream = RestClient.post signed_str_uri, json_data, {:content_type => :json}
-        
+
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
             if valid_output == ''                              
@@ -149,11 +149,11 @@ module Aspose
           rescue Exception=>e
             print e
           end
-      
-        end    
-    
+
+        end
+
       end
     end
-    
+
   end
 end
