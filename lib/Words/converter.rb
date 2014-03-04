@@ -13,11 +13,11 @@ module Aspose
       
           begin
             
-            if(@filename == '')
+            if @filename.empty?
               raise('Filename cannot be empty.')
             end
         
-            if(storage_name.empty? == true) 
+            if storage_name.empty?
               str_uri = $product_uri + '/words/' + @filename + '?format=' + save_format
             else
               str_uri = $product_uri + '/words/' + @filename + '?format=' + save_format + '&storage='+storage_name+'&folder='+folder
