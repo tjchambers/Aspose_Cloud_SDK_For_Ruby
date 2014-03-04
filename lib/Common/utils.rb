@@ -65,10 +65,14 @@ module Aspose
         end
    
         def self.validate_output(result)
-         
-          validate = ['Unknown file format.', 'Unable to read beyond the end of the stream', 
-            'Index was out of range', 'Cannot read that as a ZipFile', 'Not a Microsoft PowerPoint 2007 presentation',
-            'Index was outside the bounds of the array', 'An attempt was made to move the position before the beginning of the stream',
+
+          validate = ['Unknown file format.',
+                      'Unable to read beyond the end of the stream',
+                      'Index was out of range',
+                      'Cannot read that as a ZipFile',
+                      'Not a Microsoft PowerPoint 2007 presentation',
+                      'Index was outside the bounds of the array',
+                      'An attempt was made to move the position before the beginning of the stream',
           ]
 
           validate.each do |value|
