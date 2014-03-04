@@ -116,9 +116,9 @@ module Aspose
               str_uri += '?storage=' + storage_name
             end
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.delete(signed_str_uri, {:accept=>'application/json'})
-        
+
+            response_stream = RestClient.delete(signed_str_uri, {:accept => 'application/json'})
+
             stream_hash = JSON.parse(response_stream)
         
             if(stream_hash['Code'] != 200)
@@ -131,8 +131,8 @@ module Aspose
             print e
           end
         end
-   
-        def create_folder (folder_name,storage_type = 'Aspose',storage_name='')
+
+        def create_folder (folder_name, storage_type = 'Aspose', storage_name='')
           begin
             raise 'Folder name cannot be empty' if folder_name.empty?
             str_uri = @str_uri_folder + folder_name
@@ -182,7 +182,7 @@ module Aspose
           end
         end
         # Get file from Aspose server
-        def get_file (file_name,storage_type = 'Aspose',storage_name='')
+        def get_file (file_name, storage_type = 'Aspose', storage_name = '')
           begin
 
             raise 'Filename cannot be empty' if file_name.empty?
