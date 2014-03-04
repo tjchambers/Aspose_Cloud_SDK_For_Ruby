@@ -3,9 +3,9 @@ module Aspose
   module Cloud
     module Common
       class Utils
-        
-        def self.process_command(url,method='GET',header_type='XML',src='')
-          
+
+        def self.process_command(url, method='GET', header_type='XML', src='')
+
           uri = URI.parse(url)
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = false
@@ -17,28 +17,23 @@ module Aspose
           elsif method == 'DELETE'
             request = Net::HTTP::Delete.new(url)
           elsif method == 'POST'
-            request = Net::HTTP::Post.new(url)            
+            request = Net::HTTP::Post.new(url)
           end
-          
-          if src != ''
-            request.body = src
-          end
-          
+
+          request.body = src unless src.empty?
+
           if header_type == 'XML'
             request.add_field('Content-Type', 'application/xml')
           elsif header_type == 'JSON'
             request.add_field('Content-Type', 'application/json')
           end
-          
-          response = http.request(request)
-          
-          return response.body
-          
+
+          http.request(request).body
         end
-        
+
         # Signs a URI with your appSID and Key.
         # * :url describes the URL to sign
-   
+
         def self.sign(url)
           url = URI.escape(url)
           parsed_url = URI.parse(url)
@@ -54,7 +49,7 @@ module Aspose
           raw_signature = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha1'), $app_key, url_to_sign)
 
           #Convert raw to encoded string
-          signature = Base64.strict_encode64(raw_signature).tr('+/','-_')
+          signature = Base64.strict_encode64(raw_signature).tr('+/', '-_')
 
           #remove invalid character 
           signature = signature.gsub(/[=_-]/,'=' => '','_' => '%2f','-' => '%2b')
