@@ -112,9 +112,8 @@ module Aspose
             raise 'File name cannot be empty' if filename.empty?
 
             str_uri = @str_uri_file + filename
-            if(!storage_name.empty?)
-              str_uri += '?storage=' + storage_name
-            end
+            str_uri += '?storage=' + storage_name unless storage_name.empty?
+
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
             response_stream = RestClient.delete(signed_str_uri, {:accept => 'application/json'})
@@ -131,7 +130,7 @@ module Aspose
           begin
             raise 'Folder name cannot be empty' if folder_name.empty?
             str_uri = @str_uri_folder + folder_name
-            if(!storage_name.empty?)
+            unless storage_name.empty?
               str_uri += '?storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
@@ -161,9 +160,8 @@ module Aspose
         def get_disc_usage (storage_type = 'Aspose',storage_name='')
           begin
             str_uri = @str_uri_disc
-            if(!storage_name.empty?)
-              str_uri += '?storage=' + storage_name
-            end
+            str_uri += '?storage=' + storage_name unless storage_name.empty?
+
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
             response = RestClient.get(signed_uri, :accept => 'application/json')
             JSON.parse(response)['DiscUsage']
@@ -172,6 +170,7 @@ module Aspose
             print e
           end
         end
+
         # Get file from Aspose server
         def get_file (file_name, storage_type = 'Aspose', storage_name = '')
           begin
@@ -179,9 +178,8 @@ module Aspose
             raise 'Filename cannot be empty' if file_name.empty?
 
             str_uri = @str_uri_file + file_name
-            if(!storage_name.empty?)
-              str_uri += '?storage=' + storage_name
-            end
+            str_uri += '?storage=' + storage_name unless storage_name.empty?
+
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
             RestClient.get(signed_uri, :accept => 'application/json')
 
