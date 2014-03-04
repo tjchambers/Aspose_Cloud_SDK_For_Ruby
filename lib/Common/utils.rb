@@ -10,7 +10,8 @@ module Aspose
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = false
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-          
+
+          request = nil
           if method == 'GET'
             request = Net::HTTP::Get.new(url)
           elsif method == 'DELETE'
