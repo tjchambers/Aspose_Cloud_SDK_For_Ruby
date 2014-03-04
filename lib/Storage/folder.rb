@@ -99,18 +99,11 @@ module Aspose
               str_uri += '?storage=' + storage_name
             end
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.get(signed_str_uri, {:accept=>'application/json'})
-        
-            stream_hash = JSON.parse(response_stream)
-        
-            if stream_hash['FileExist']['IsExist'] == true
-              return true
-            else
-              return false
-            end        
-        
-          rescue Exception=>e
+
+            response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+            JSON.parse(response_stream)['FileExist']['IsExist']
+
+          rescue Exception => e
             print e
           end
         end
