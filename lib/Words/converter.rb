@@ -5,7 +5,7 @@ module Aspose
 
     module Words
       class Converter
-        def initialize filename
+        def initialize filename=''
           @filename = filename
         end
     
