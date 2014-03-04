@@ -3,9 +3,6 @@ module Aspose
   module Cloud
     module Common
       class Product
-        def initialize
-
-        end
 
         # Sets the host product URI
         def self.set_base_product_uri product_uri
