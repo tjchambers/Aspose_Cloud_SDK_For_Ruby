@@ -153,13 +153,9 @@ module Aspose
               str_uri += '?storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.put(signed_uri, :accept=>'application/json')
-            json = JSON.parse(response)
-            if json['Code'] ==200
-              return true
-            else
-              return false
-            end
+            response = RestClient.put(signed_uri, :accept => 'application/json')
+            JSON.parse(response)['Code'] == 200
+
           rescue Exception => e
             print e
           end
