@@ -38,12 +38,9 @@ module Aspose
           url = URI.escape(url)
           parsed_url = URI.parse(url)
 
-          url_to_sign =''
-          if parsed_url.query.nil? 
-            url_to_sign = parsed_url.scheme+'://' + parsed_url.host + parsed_url.path + '?appSID=' + $app_sid
-          else
-            url_to_sign = parsed_url.scheme+'://' + parsed_url.host + parsed_url.path + '?' + parsed_url.query + '&appSID=' + $app_sid
-          end
+          url_to_sign = parsed_url.scheme+'://' + parsed_url.host + parsed_url.path + '?appSID=' + $app_sid
+          url_to_sign += '&' + parsed_url.query if parsed_url.query
+
 
           # create a signature using the private key and the URL
           raw_signature = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha1'), $app_key, url_to_sign)
