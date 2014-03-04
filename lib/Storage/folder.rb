@@ -107,8 +107,8 @@ module Aspose
             print e
           end
         end
-    
-        def delete_file(filename,storage_type = 'Aspose' , storage_name = '')
+
+        def delete_file(filename, storage_type = 'Aspose', storage_name = '')
           begin
         
             if(filename == '')
