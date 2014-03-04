@@ -120,14 +120,9 @@ module Aspose
             response_stream = RestClient.delete(signed_str_uri, {:accept => 'application/json'})
 
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] != 200)
-              return false
-            else
-              return true
-            end                
-        
-          rescue Exception=>e
+            stream_hash['Code'] == 200
+
+          rescue Exception => e
             print e
           end
         end
@@ -155,13 +150,9 @@ module Aspose
 
             str_uri = @str_uri_folder + folder_name
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.delete(signed_uri, :accept=>'application/json')
-            json = JSON.parse(response)
-            if json['Code'] ==200
-              return true
-            else
-              return false
-            end
+            response = RestClient.delete(signed_uri, :accept => 'application/json')
+            JSON.parse(response)['Code'] == 200
+
           rescue Exception => e
             print e
           end
@@ -174,9 +165,9 @@ module Aspose
               str_uri += '?storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept=>'application/json')
-            json = JSON.parse(response)
-            return json['DiscUsage']
+            response = RestClient.get(signed_uri, :accept => 'application/json')
+            JSON.parse(response)['DiscUsage']
+
           rescue Exception => e
             print e
           end
@@ -192,8 +183,8 @@ module Aspose
               str_uri += '?storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept=>'application/json')
-            return response
+            RestClient.get(signed_uri, :accept => 'application/json')
+
           rescue Exception => e
             print e
           end
