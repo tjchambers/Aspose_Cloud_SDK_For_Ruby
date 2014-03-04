@@ -60,8 +60,8 @@ module Aspose
           end
 
           # prepend the server and append the signature.
-          signed_url = url_to_sign + "&signature=#{signature}"
-          return signed_url
+          url_to_sign + "&signature=#{signature}"
+
         end
    
         def self.validate_output(result)
@@ -83,7 +83,7 @@ module Aspose
         # * :datestring holds the JSON Date value
         def self.parse_date(date_string)
           seconds_since_epoch = date_string.scan(/[0-9]+/)[0].to_i
-          return Time.at((seconds_since_epoch-(21600000 + 18000000))/1000)
+          Time.at((seconds_since_epoch-(21600000 + 18000000))/1000)
         end
 
         # Uploads a binary file from the client system
@@ -103,7 +103,7 @@ module Aspose
           doc.elements.each(field_name) do |ele|
             pages << ele.text
           end
-          return pages.size
+          pages.size
         end
         # Saves the response stream to a local file.
         def self.save_file(response_stream,local_file)
@@ -113,11 +113,7 @@ module Aspose
         end
    
         def self.get_filename(file)
-     
-          filename = File.basename(file, File.extname(file) );
-     
-          return filename
-     
+          File.basename(file, File.extname(file))
         end
    
       end
