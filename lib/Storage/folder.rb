@@ -95,7 +95,7 @@ module Aspose
             raise('Filename cannot be empty') if  filename.empty?
 
             str_uri = @str_uri_exist + filename
-            if(!storage_name.empty?)
+            unless storage_name.empty?
               str_uri += '?storage=' + storage_name
             end
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
