@@ -59,8 +59,8 @@ module Aspose
         # * :remoteFolderPath represents remote folder relative to the root. Pass empty string for the root folder.
         def get_files(remote_folder_path)
           str_url = @str_uri_folder
-          if not remote_folder_path.empty?
-            str_url+remote_folder_path
+          unless remote_folder_path.empty?
+            str_url += remote_folder_path
           end
           signed_uri = Aspose::Cloud::Common::Utils.sign(str_url)
           response = RestClient.get(signed_uri, :accept=>'application/json')
