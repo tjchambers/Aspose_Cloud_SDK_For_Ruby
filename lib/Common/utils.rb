@@ -50,7 +50,7 @@ module Aspose
           end
 
           # create a signature using the private key and the URL
-          raw_signature = OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha1'), $app_key, url_to_sign)
+          raw_signature = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha1'), $app_key, url_to_sign)
 
           #Convert raw to encoded string
           signature = Base64.strict_encode64(raw_signature).tr('+/','-_')
