@@ -70,20 +70,13 @@ module Aspose
             'Index was out of range', 'Cannot read that as a ZipFile', 'Not a Microsoft PowerPoint 2007 presentation',
             'Index was outside the bounds of the array', 'An attempt was made to move the position before the beginning of the stream',
           ]
-         
-          invalid = false
-         
+
           validate.each do |value|
-            if result.index(value) != nil
-              invalid = ture
-            end
+            return result if result.index(value)
           end
-         
-          if invalid == true
-            return result
-          else
-            return ''
-          end         
+
+          ''
+
         end
 
         # Parses JSON date value to a valid date format
