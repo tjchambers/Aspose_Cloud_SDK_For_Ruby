@@ -5,8 +5,9 @@ module Aspose
 
     module Words
       class Document
-        def initialize(filename)
+        def initialize filename
           @filename = filename
+          raise 'Base file not specified.' if filename.empty?
         end
 
 =begin
@@ -14,233 +15,174 @@ module Aspose
   @param string append_docs
   @param import_format_modes
   @param source_folder
-=end     
+=end
 
         def append_document append_docs, import_format_modes, source_folder
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
+
             if append_docs.length != import_format_modes.length
               raise 'Please specify complete documents and import format modes.'
             end
-        
+
             str_uri = $product_uri + '/words/' + @filename + '/appendDocument'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
+
             objs = []
-            
+
             i = 0
             append_docs.each do |val|
-              objs << { "Href" => source_folder.empty?? val : source_folder + "\\" + val , "ImportFormatMode"=> import_format_modes[i] }
+              objs << {"Href" => source_folder.empty? ? val : source_folder + "\\" + val, "ImportFormatMode" => import_format_modes[i]}
               i = i+1
             end
-            
-            json_data = JSON.generate( { "DocumentEntries" => objs } )
-        
-            response_stream = RestClient.post(signed_str_uri,json_data,{:content_type => :json})
-        
+
+            json_data = JSON.generate({'DocumentEntries' => objs})
+
+            response_stream = RestClient.post(signed_str_uri, json_data, {:content_type => :json})
+
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
-        
-            if valid_output == ''                              
-              folder = Aspose::Cloud::AsposeStorage::Folder.new
-              if source_folder == ''
-                output_stream = folder.get_file(@filename)
-              else
-                output_stream = folder.get_file( source_folder + '/' + @filename)
-              end
-              output_path = $out_put_location + @filename
-              Aspose::Cloud::Common::Utils.save_file(output_stream,output_path)
-              return ''
-            else
-              return valid_output
-            end
-        
-        
-          rescue Exception=>e
+
+            return valid_output unless valid_output.empty?
+            folder = Aspose::Cloud::AsposeStorage::Folder.new
+
+            output_stream = folder.get_file(source_folder.empty? ? @filename : (source_folder + '/' + @filename))
+            output_path = $out_put_location + @filename
+            Aspose::Cloud::Common::Utils.save_file(output_stream, output_path)
+            ''
+          rescue Exception => e
             print e
           end
         end
-    
+
 =begin
    Get Resource Properties information like document source format, IsEncrypted, IsSigned and document properties   
-=end     
-    
+=end
+
         def get_document_info
-      
+
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
+
             str_uri = $product_uri + '/words/' + @filename
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
-        
+
+            response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-              return stream_hash['Document']
-            else
-              return false
-            end
-        
-          rescue Exception=>e
+            stream_hash['Code'] == 200 ? stream_hash['Document'] : false
+
+          rescue Exception => e
             print e
           end
-      
+
         end
-    
+
 =begin
    Get Resource Properties information like document source format, IsEncrypted, IsSigned and document properties
    @param string property_name
-=end     
-    
+=end
+
         def get_property property_name
-      
+
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
+
             if property_name == ''
               raise 'Property name not specified.'
             end
-        
+
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
-        
+
+            response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-              return stream_hash['DocumentProperty']
-            else
-              return false
-            end
-        
-          rescue Exception=>e
+            stream_hash['Code'] == 200 ? stream_hash['DocumentProperty'] : false
+
+          rescue Exception => e
             print e
           end
-      
+
         end
 
 =begin
    Set document property
    @param string property_name
    @param string property_value
-=end     
-    
+=end
+
         def set_property property_name, property_value
-      
+
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
-            if property_name == ''
-              raise 'Property name not specified.'
-            end
-        
-            if property_value == ''
-              raise 'Property value not specified.'
-            end
-        
-            post_hash = { 'Value' => property_value}
-            json_data = post_hash.to_json  
-        
+
+            raise 'Property name not specified.' if property_name.empty?
+            raise 'Property value not specified.' if property_value.empty?
+
+            post_hash = {'Value' => property_value}
+            json_data = post_hash.to_json
+
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.put(signed_str_uri,json_data,{:content_type=>:json})
-        
-            xmldoc = REXML::Document.new(response_stream)                        
-        
-            if(xmldoc.elements.to_a('SaaSposeResponse/Status').first.text == 'OK')
+
+            response_stream = RestClient.put(signed_str_uri, json_data, {:content_type => :json})
+
+            xmldoc = REXML::Document.new(response_stream)
+
+            if xmldoc.elements.to_a('SaaSposeResponse/Status').first.text == 'OK'
               return xmldoc.elements.to_a('SaaSposeResponse/DocumentProperty')
-            else
-              return false
             end
-        
-          rescue Exception=>e
+
+            false
+
+          rescue Exception => e
             print e
           end
-      
-        end    
+
+        end
 
 =begin
    Delete a document property
    @param string property_name
-=end     
-    
+=end
+
         def delete_property property_name
-      
+
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
-            if property_name == ''
-              raise 'Property name not specified.'
-            end
-        
+            raise 'Property name not specified.' if property_name.empty?
+
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.delete(signed_str_uri,{:accept=>'application/json'})
-        
+
+            response_stream = RestClient.delete(signed_str_uri, {:accept => 'application/json'})
+
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-              return true
-            else
-              return false
-            end
-        
-          rescue Exception=>e
+            stream_hash['Code'] == 200
+
+          rescue Exception => e
             print e
           end
-      
+
         end
 
 =begin
    Get Document's properties
-=end     
-    
+=end
+
         def get_properties
-      
+
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
-        
+
+            response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-              return stream_hash['DocumentProperties']['List']
-            else
-              return false
-            end
-        
-          rescue Exception=>e
+
+            return stream_hash['DocumentProperties']['List'] if  stream_hash['Code'] == 200
+            false
+
+          rescue Exception => e
             print e
           end
-      
-        end    
+
+        end
 
 =begin
      Convert Word to different file format without using storage
@@ -248,55 +190,33 @@ module Aspose
      @param string outputFilename
      @param string outputFormat
 =end
-    
-        def convert_local_file input_file,output_filename,output_format
+
+        def convert_local_file input_file, output_filename, output_format
           begin
-        
-            if input_file == ''
-              raise('input file not specified')
-            end                
-        
-            if output_filename == ''
-              raise('output file not specified')
-            end
-        
-            if output_format == ''
-              raise('output format not specified')
-            end
-        
+
+            raise('input file not specified') if input_file.empty?
+            raise('output file not specified') if output_filename.empty?
+            raise('output format not specified') if output_format.empty?
+
             str_uri = $product_uri + '/words/convert?format=' + output_format
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = Aspose::Cloud::Common::Utils.upload_file_binary(input_file, str_signed_uri)                
-        
+
+            response_stream = Aspose::Cloud::Common::Utils.upload_file_binary(input_file, str_signed_uri)
+
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
-        
-            if valid_output == ''
-          
-              if output_format == 'html'
-                saveformat = 'zip'
-              else
-                saveformat = output_format
-              end
-          
-              if output_filename == ''
-                output_filename = Utils::get_filename(input_file) + '.' + saveformat
-              end
-          
-              output_path = $out_put_location + output_filename
-              Aspose::Cloud::Common::Utils.save_file(response_stream,output_path)
-              return ''
-            else
-              return valid_output
-            end
-        
-          rescue Exception=>e
-            print e        
-          end      
-        end    
-    
+
+            return valid_output unless valid_output.empty?
+
+            output_path = $out_put_location + output_filename
+            Aspose::Cloud::Common::Utils.save_file(response_stream, output_path)
+            ''
+          rescue Exception => e
+            print e
+          end
+        end
+
       end
     end
-    
+
   end
 end
