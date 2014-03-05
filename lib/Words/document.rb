@@ -111,17 +111,13 @@ module Aspose
         def set_property property_name, property_value
 
           begin
-            if property_name == ''
-              raise 'Property name not specified.'
-            end
-        
-            if property_value == ''
-              raise 'Property value not specified.'
-            end
-        
-            post_hash = { 'Value' => property_value}
-            json_data = post_hash.to_json  
-        
+
+            raise 'Property name not specified.' if property_name.empty?
+            raise 'Property value not specified.' if property_value.empty?
+
+            post_hash = {'Value' => property_value}
+            json_data = post_hash.to_json
+
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
@@ -149,10 +145,8 @@ module Aspose
         def delete_property property_name
 
           begin
-            if property_name == ''
-              raise 'Property name not specified.'
-            end
-        
+            raise 'Property name not specified.' if property_name.empty?
+
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
@@ -218,31 +212,17 @@ module Aspose
             response_stream = Aspose::Cloud::Common::Utils.upload_file_binary(input_file, str_signed_uri)
 
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
-        
-            if valid_output == ''
-          
-              if output_format == 'html'
-                saveformat = 'zip'
-              else
-                saveformat = output_format
-              end
-          
-              if output_filename == ''
-                output_filename = Utils::get_filename(input_file) + '.' + saveformat
-              end
-          
-              output_path = $out_put_location + output_filename
-              Aspose::Cloud::Common::Utils.save_file(response_stream,output_path)
-              return ''
-            else
-              return valid_output
-            end
-        
-          rescue Exception=>e
-            print e        
-          end      
-        end    
-    
+
+            return valid_output unless valid_output.empty?
+
+            output_path = $out_put_location + output_filename
+            Aspose::Cloud::Common::Utils.save_file(response_stream, output_path)
+            ''
+          rescue Exception => e
+            print e
+          end
+        end
+
       end
     end
 
