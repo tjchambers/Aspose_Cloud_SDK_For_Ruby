@@ -30,11 +30,11 @@ module Aspose
         
             str_uri = $product_uri + '/words/' + @filename + '/insertWatermarkText'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            post_hash = { 'Text' => text, 'RotationAngle'=>rotation_angle}
+            post_hash = {'Text' => text, 'RotationAngle' => rotation_angle}
             json_data = post_hash.to_json
-        
-            response_stream = RestClient.post(signed_str_uri,json_data,{:content_type => :json})
-        
+
+            response_stream = RestClient.post(signed_str_uri, json_data, {:content_type => :json})
+
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
             if valid_output == ''                              
@@ -73,17 +73,17 @@ module Aspose
             end
         
             str_uri = $product_uri + '/words/' + @filename + '/insertWatermarkImage?imageFile=' + image_file.to_s + '&rotationAngle=' + rotation_angle.to_s
-            signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)                
-        
-            response_stream = RestClient.post(signed_str_uri,'',{:content_type => :json})
-        
+            signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
+
+            response_stream = RestClient.post(signed_str_uri, '', {:content_type => :json})
+
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
-        
-            if valid_output == ''                              
+
+            if valid_output == ''
               folder = Aspose::Cloud::AsposeStorage::Folder.new
-              output_stream = folder.get_file(@filename)                   
+              output_stream = folder.get_file(@filename)
               output_path = $out_put_location + @filename
-              Aspose::Cloud::Common::Utils.save_file(output_stream,output_path)
+              Aspose::Cloud::Common::Utils.save_file(output_stream, output_path)
               return ''
             else
               return valid_output
@@ -119,7 +119,7 @@ module Aspose
             post_hash = { 'OldValue' => old_value, 'NewValue'=>new_value,'IsMatchCase' => is_match_case,'IsMatchWholeWord' => is_match_whole_word }
             json_data = post_hash.to_json
             str_uri = $product_uri + '/words/' + @filename + '/replaceText'
-            signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)                
+            signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
             response_stream = RestClient.post signed_str_uri, json_data, {:content_type => :json}
 
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
