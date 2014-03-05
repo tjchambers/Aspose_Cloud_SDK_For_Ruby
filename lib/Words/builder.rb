@@ -19,15 +19,10 @@ module Aspose
         def insert_watermark_text text, rotation_angle
 
           begin
-        
-            if text == ''
-              raise 'Text not specified.'
-            end
-        
-            if rotation_angle == ''
-              raise 'Rotation Angle not specified.'
-            end
-        
+
+            raise 'Text not specified.' if text.empty?
+            check_angle(rotation_angle)
+
             str_uri = $product_uri + '/words/' + @filename + '/insertWatermarkText'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
             post_hash = {'Text' => text, 'RotationAngle' => rotation_angle}
@@ -53,6 +48,10 @@ module Aspose
           end
       
         end 
+        def check_angle(rotation_angle)
+          raise 'Rotation Angle not specified.' if rotation_angle.empty?
+
+        end
 
 =begin
    Inserts water mark image into the document.
@@ -63,15 +62,9 @@ module Aspose
         def insert_watermark_image image_file, rotation_angle
 
           begin
-        
-            if image_file == ''
-              raise 'Image file not specified.'
-            end
-        
-            if rotation_angle == ''
-              raise 'Rotation Angle not specified.'
-            end
-        
+            check_angle(rotation_angle)
+            raise 'Image file not specified.' if image_file.empty?
+
             str_uri = $product_uri + '/words/' + @filename + '/insertWatermarkImage?imageFile=' + image_file.to_s + '&rotationAngle=' + rotation_angle.to_s
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
@@ -107,16 +100,10 @@ module Aspose
         def replace_text old_value, new_value, is_match_case, is_match_whole_word
 
           begin
-        
-            if old_value == ''
-              raise 'Old value not specified.'
-            end
-        
-            if new_value == ''
-              raise 'New Value not specified.'
-            end
-        
-            post_hash = { 'OldValue' => old_value, 'NewValue'=>new_value,'IsMatchCase' => is_match_case,'IsMatchWholeWord' => is_match_whole_word }
+            raise 'Old value not specified.' if old_value.empty?
+            raise 'New Value not specified.' if new_value.empty?
+
+            post_hash = {'OldValue' => old_value, 'NewValue' => new_value, 'IsMatchCase' => is_match_case, 'IsMatchWholeWord' => is_match_whole_word}
             json_data = post_hash.to_json
             str_uri = $product_uri + '/words/' + @filename + '/replaceText'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
