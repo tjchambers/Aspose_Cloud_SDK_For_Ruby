@@ -40,23 +40,15 @@ module Aspose
             response_stream = RestClient.post(signed_str_uri, json_data, {:content_type => :json})
 
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
-        
-            if valid_output == ''                              
-              folder = Aspose::Cloud::AsposeStorage::Folder.new
-              if source_folder == ''
-                output_stream = folder.get_file(@filename)
-              else
-                output_stream = folder.get_file( source_folder + '/' + @filename)
-              end
-              output_path = $out_put_location + @filename
-              Aspose::Cloud::Common::Utils.save_file(output_stream,output_path)
-              return ''
-            else
-              return valid_output
-            end
-        
-        
-          rescue Exception=>e
+
+            return valid_output unless valid_output.empty?
+            folder = Aspose::Cloud::AsposeStorage::Folder.new
+
+            output_stream = folder.get_file(source_folder.empty? ? @filename : (source_folder + '/' + @filename))
+            output_path = $out_put_location + @filename
+            Aspose::Cloud::Common::Utils.save_file(output_stream, output_path)
+            ''
+          rescue Exception => e
             print e
           end
         end
@@ -102,14 +94,9 @@ module Aspose
             response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-              return stream_hash['DocumentProperty']
-            else
-              return false
-            end
-        
-          rescue Exception=>e
+            stream_hash['Code'] == 200 ? stream_hash['DocumentProperty'] : false
+
+          rescue Exception => e
             print e
           end
 
@@ -137,18 +124,18 @@ module Aspose
         
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.put(signed_str_uri,json_data,{:content_type=>:json})
-        
-            xmldoc = REXML::Document.new(response_stream)                        
-        
-            if(xmldoc.elements.to_a('SaaSposeResponse/Status').first.text == 'OK')
+
+            response_stream = RestClient.put(signed_str_uri, json_data, {:content_type => :json})
+
+            xmldoc = REXML::Document.new(response_stream)
+
+            if xmldoc.elements.to_a('SaaSposeResponse/Status').first.text == 'OK'
               return xmldoc.elements.to_a('SaaSposeResponse/DocumentProperty')
-            else
-              return false
             end
-        
-          rescue Exception=>e
+
+            false
+
+          rescue Exception => e
             print e
           end
 
