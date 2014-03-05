@@ -193,19 +193,11 @@ module Aspose
 
         def convert_local_file input_file, output_filename, output_format
           begin
-        
-            if input_file == ''
-              raise('input file not specified')
-            end                
-        
-            if output_filename == ''
-              raise('output file not specified')
-            end
-        
-            if output_format == ''
-              raise('output format not specified')
-            end
-        
+
+            raise('input file not specified') if input_file.empty?
+            raise('output file not specified') if output_filename.empty?
+            raise('output format not specified') if output_format.empty?
+
             str_uri = $product_uri + '/words/convert?format=' + output_format
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
