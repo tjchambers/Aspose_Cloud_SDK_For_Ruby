@@ -78,9 +78,9 @@ module Aspose
         
             str_uri = $product_uri + '/words/' + @filename
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
-        
+
+            response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+
             stream_hash = JSON.parse(response_stream)
             stream_hash['Code'] == 200 ? stream_hash['Document'] : false
 
@@ -109,9 +109,9 @@ module Aspose
 
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
-        
+
+            response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+
             stream_hash = JSON.parse(response_stream)
         
             if(stream_hash['Code'] == 200)
@@ -189,9 +189,9 @@ module Aspose
         
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.delete(signed_str_uri,{:accept=>'application/json'})
-        
+
+            response_stream = RestClient.delete(signed_str_uri, {:accept => 'application/json'})
+
             stream_hash = JSON.parse(response_stream)
             stream_hash['Code'] == 200
 
@@ -215,9 +215,9 @@ module Aspose
         
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        
-            response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
-        
+
+            response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+
             stream_hash = JSON.parse(response_stream)
         
             if(stream_hash['Code'] == 200)
