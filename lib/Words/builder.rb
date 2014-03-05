@@ -31,23 +31,22 @@ module Aspose
             response_stream = RestClient.post(signed_str_uri, json_data, {:content_type => :json})
 
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
-        
-            if valid_output == ''                              
-              folder = Aspose::Cloud::AsposeStorage::Folder.new
-              output_stream = folder.get_file(@filename)                   
-              output_path = $out_put_location + @filename
-              Aspose::Cloud::Common::Utils.save_file(output_stream,output_path)
-              return ''
-            else
-              return valid_output
-            end        
-        
-        
-          rescue Exception=>e
+
+            return valid_output unless valid_output.empty?
+
+            folder = Aspose::Cloud::AsposeStorage::Folder.new
+            output_stream = folder.get_file(@filename)
+            output_path = $out_put_location + @filename
+            Aspose::Cloud::Common::Utils.save_file(output_stream, output_path)
+
+          rescue Exception => e
             print e
           end
-      
-        end 
+
+          ''
+
+        end
+
         def check_angle(rotation_angle)
           raise 'Rotation Angle not specified.' if rotation_angle.empty?
 
@@ -110,19 +109,14 @@ module Aspose
             response_stream = RestClient.post signed_str_uri, json_data, {:content_type => :json}
 
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
-        
-            if valid_output == ''                              
-              folder = Aspose::Cloud::AsposeStorage::Folder.new
-              output_stream = folder.get_file(@filename)                   
-              output_path = $out_put_location + @filename
-              Aspose::Cloud::Common::Utils.save_file(output_stream,output_path)
-              return ''
-            else
-              return valid_output
-            end        
-        
-        
-          rescue Exception=>e
+
+            return valid_output unless  valid_output.empty?
+            folder = Aspose::Cloud::AsposeStorage::Folder.new
+            output_stream = folder.get_file(@filename)
+            output_path = $out_put_location + @filename
+            Aspose::Cloud::Common::Utils.save_file(output_stream, output_path)
+            ''
+          rescue Exception => e
             print e
           end
 
