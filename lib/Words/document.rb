@@ -7,6 +7,7 @@ module Aspose
       class Document
         def initialize filename
           @filename = filename
+          raise 'Base file not specified.' if filename.empty?
         end
 
 =begin
@@ -18,11 +19,7 @@ module Aspose
 
         def append_document append_docs, import_format_modes, source_folder
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
+
             if append_docs.length != import_format_modes.length
               raise 'Please specify complete documents and import format modes.'
             end
@@ -71,11 +68,7 @@ module Aspose
         def get_document_info
 
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
+
             str_uri = $product_uri + '/words/' + @filename
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
@@ -98,11 +91,7 @@ module Aspose
         def get_property property_name
 
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
+
             if property_name == ''
               raise 'Property name not specified.'
             end
@@ -135,11 +124,6 @@ module Aspose
         def set_property property_name, property_value
 
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
             if property_name == ''
               raise 'Property name not specified.'
             end
@@ -178,11 +162,6 @@ module Aspose
         def delete_property property_name
 
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
             if property_name == ''
               raise 'Property name not specified.'
             end
@@ -208,25 +187,17 @@ module Aspose
         def get_properties
 
           begin
-        
-            if @filename == ''
-              raise 'Base file not specified.'
-            end
-        
             str_uri = $product_uri + '/words/' + @filename + '/documentProperties'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
             response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
             stream_hash = JSON.parse(response_stream)
-        
-            if(stream_hash['Code'] == 200)
-              return stream_hash['DocumentProperties']['List']
-            else
-              return false
-            end
-        
-          rescue Exception=>e
+
+            return stream_hash['DocumentProperties']['List'] if  stream_hash['Code'] == 200
+            false
+
+          rescue Exception => e
             print e
           end
 
