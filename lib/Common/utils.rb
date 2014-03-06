@@ -35,8 +35,8 @@ module Aspose
           url = URI.escape(url)
           parsed_url = URI.parse(url)
 
-          url_to_sign = parsed_url.scheme+'://' + parsed_url.host + parsed_url.path + '?appSID=' + $app_sid
-          url_to_sign += '&' + parsed_url.query if parsed_url.query
+          url_to_sign = "#{parsed_url.scheme}://#{parsed_url.host}#{parsed_url.path}?appSID=#{$app_sid}"
+          url_to_sign += "&#{parsed_url.query}" if parsed_url.query
 
 
           # create a signature using the private key and the URL
