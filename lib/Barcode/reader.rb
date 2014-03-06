@@ -8,9 +8,7 @@ module Aspose
 
         def read symbology
           begin
-            if @filenmae == ''
-              raise 'Base file is not specified'
-            end
+            raise 'Base file is not specified' if @filename.blank?
             str_uri = $product_uri + '/barcode/' + @filename + '/recognize?' + (symbology.length <= 0 ? 'type=' : 'type=' + symbology.to_s)
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
             response = RestClient.get(signed_uri,:accept => 'application/json')
