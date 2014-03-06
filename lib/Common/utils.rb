@@ -3,7 +3,6 @@ module Aspose
   module Cloud
     module Common
       class Utils
-
         def self.process_command(url, method='GET', header_type='XML', src='')
 
           uri = URI.parse(url)
@@ -11,14 +10,12 @@ module Aspose
           http.use_ssl = false
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-          request = nil
-          if method == 'GET'
-            request = Net::HTTP::Get.new(url)
-          elsif method == 'DELETE'
-            request = Net::HTTP::Delete.new(url)
-          elsif method == 'POST'
-            request = Net::HTTP::Post.new(url)
-          end
+          request = case method
+                      when 'GET' then Net::HTTP::Get.new(url)
+                      when 'DELETE' then Net::HTTP::Delete.new(url)
+                      when 'POST' then Net::HTTP::Post.new(url)
+                      else nil
+                    end
 
           request.body = src unless src.empty?
 
@@ -38,8 +35,8 @@ module Aspose
           url = URI.escape(url)
           parsed_url = URI.parse(url)
 
-          url_to_sign = parsed_url.scheme+'://' + parsed_url.host + parsed_url.path + '?appSID=' + $app_sid
-          url_to_sign += '&' + parsed_url.query if parsed_url.query
+          url_to_sign = "#{parsed_url.scheme}://#{parsed_url.host}#{parsed_url.path}?appSID=#{$app_sid}"
+          url_to_sign += "&#{parsed_url.query}" if parsed_url.query
 
 
           # create a signature using the private key and the URL
