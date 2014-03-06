@@ -6,7 +6,7 @@ module Aspose
       class Folder
 
         def initialize
-          @str_uri_folder = $product_uri + '/storage/folder'
+          @str_uri_folder = $product_uri + '/storage/folder/'
           @str_uri_file = $product_uri + '/storage/file/'
           @str_uri_exist = $product_uri + '/storage/exist/'
           @str_uri_disc = $product_uri + '/storage/disc/'
@@ -128,11 +128,12 @@ module Aspose
         def create_folder (folder_name, storage_type = 'Aspose', storage_name='')
           begin
             raise 'Folder name cannot be empty' if folder_name.empty?
-            str_uri = @str_uri_folder + folder_name
+            folder_uri = URI.join(@str_uri_folder, folder_name)
             unless storage_name.empty?
-              str_uri += '?storage=' + storage_name
+              storage_query = URI.decode_www_form(folder_uri.query || []) << ["storage", storage_name] 
+              folder_uri.query = URI.encode_www_form(storage_query)
             end
-            signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
+            signed_uri = Aspose::Cloud::Common::Utils.sign(folder_uri.to_s)
             response = RestClient.put(signed_uri, nil, :accept => :json)
             JSON.parse(response)['Code'] == 200
 
