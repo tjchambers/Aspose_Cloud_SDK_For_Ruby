@@ -15,9 +15,9 @@ module Aspose
               (y_dimension <= 0 ? '' : '&dimensionY=' + y_dimension.to_s)
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
             response = RestClient.get(signed_uri,:accept => 'application/json')
-            output_path = $out_put_location + 'barcode' + symbology.to_s + '.' + image_format.to_s
+            output_path = "#{$out_put_location}barcode#{symbology}.#{image_format}"
             Aspose::Cloud::Common::Utils.save_file(response, output_path)
-            return output_path
+            output_path
           rescue Exception=>e
             print e
           end
