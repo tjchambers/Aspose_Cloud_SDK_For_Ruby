@@ -1,4 +1,3 @@
-
 module Aspose
   module Cloud
 
@@ -12,9 +11,8 @@ module Aspose
           raise 'Filename cannot be empty.' if @filename.blank?
 
           str_uri = $product_uri + '/words/' + @filename + '?format=' + save_format
-          unless storage_name.blank?
-            str_uri += "&storage=#{ storage_name }&folder=#{ folder }"
-          end
+          str_uri += "&storage=#{ storage_name }&folder=#{ folder }" unless storage_name.blank?
+
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
           response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
@@ -35,16 +33,15 @@ module Aspose
           raise 'Please Specify Output Path' if output_path.blank?
           raise 'Please Specify Output Format' if output_format.blank?
 
-          str_uri =$product_uri + '/words/convert?format=' + output_format
+          str_uri = $product_uri + '/words/convert?format=' + output_format
           signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
+          puts signed_uri
           response_stream = Aspose::Cloud::Common::Utils.upload_file_binary(input_path, signed_uri)
+          p response_stream
           v_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
+          p v_output
           if v_output.blank?
-            if output_format == 'html'
-              save_format = 'zip'
-            else
-              save_format = output_format
-            end
+            save_format = output_format == 'html' ? 'zip' : output_format
             output_file = $out_put_location + Aspose::Cloud::Common::Utils.get_filename(input_path) + '.' + save_format
             Aspose::Cloud::Common::Utils.save_file(response_stream, output_file)
             return output_file
