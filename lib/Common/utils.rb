@@ -91,14 +91,14 @@ module Aspose
         # * :localfile holds the local file path along with name
         # * :url holds the required url to use while uploading the file to Aspose Storage		 
         def self.upload_file_binary(localfile, url)
-          RestClient.put(url, File.new(localfile, 'rb'))
+          ::RestClient.put(url, File.new(localfile, 'rb'))
         end
 
         # Gets the count of a particular field in the response
         # * :localfile holds the local file path along with name
         # * :url holds the required url to use while uploading the file to Aspose Storage		 		 
         def self.get_field_count(url, field_name)
-          response = RestClient.get(url, :accept => 'application/xml')
+          response = ::RestClient.get(url, :accept => 'application/xml')
           doc = REXML::Document.new(response.body)
           pages = []
           doc.elements.each(field_name) do |ele|

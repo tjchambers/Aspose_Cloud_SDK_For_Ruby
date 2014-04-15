@@ -27,7 +27,7 @@ module Aspose
                        'RotationAngle' => rotation_angle}
           json_data = post_hash.to_json
 
-          process_response RestClient.post(signed_str_uri, json_data, {:content_type => :json})
+          process_response ::RestClient.post(signed_str_uri, json_data, {:content_type => :json})
         end
 
         def check_angle(rotation_angle)
@@ -48,7 +48,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename + '/insertWatermarkImage?imageFile=' + image_file.to_s + '&rotationAngle=' + rotation_angle.to_s
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          process_response RestClient.post(signed_str_uri, '', {:content_type => :json})
+          process_response ::RestClient.post(signed_str_uri, '', {:content_type => :json})
 
         end
 
@@ -73,7 +73,7 @@ module Aspose
         json_data = post_hash.to_json
         str_uri = $product_uri + '/words/' + @filename + '/replaceText'
         signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-        process_response RestClient.post signed_str_uri, json_data, {:content_type => :json}
+        process_response ::RestClient.post signed_str_uri, json_data, {:content_type => :json}
 
       end
 

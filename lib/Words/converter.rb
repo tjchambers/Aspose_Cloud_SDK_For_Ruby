@@ -17,7 +17,7 @@ module Aspose
           end
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
           valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
 
@@ -35,7 +35,7 @@ module Aspose
           raise 'Please Specify Output Path' if output_path.blank?
           raise 'Please Specify Output Format' if output_format.blank?
 
-          str_uri =$product_uri + '/words/convert?format=' + output_format
+          str_uri = $product_uri + '/words/convert?format=' + output_format
           signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
           response_stream = Aspose::Cloud::Common::Utils.upload_file_binary(input_path, signed_uri)
           v_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
