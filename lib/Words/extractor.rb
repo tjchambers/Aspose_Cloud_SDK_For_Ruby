@@ -19,7 +19,7 @@ module Aspose
             str_uri = $product_uri + '/words/' + @filename + '/textItems'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-            response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+            response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
             stream_hash = JSON.parse(response_stream)
             stream_hash['Code'] == 200 ? stream_hash['TextItems']['List'] : false
@@ -43,7 +43,7 @@ module Aspose
 
           str_uri = $product_uri + '/words/' + @filename + '/drawingObjects/' + index.to_s + '/oleData'
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
           valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
 
@@ -72,7 +72,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename + '/drawingObjects/' + index.to_s + '/imagedata'
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
           valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
 
@@ -101,7 +101,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename + '/drawingObjects/' + index.to_s + '?format=' + render_format
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
           valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
 
@@ -123,7 +123,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename + '/drawingObjects'
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
           stream_hash = JSON.parse(response_stream)
           stream_hash['Code'] == 200 ? stream_hash['DrawingObjects']['List'] : false
@@ -148,7 +148,7 @@ module Aspose
           str_uri = object_uri
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
           stream_hash = JSON.parse(response_stream)
 
@@ -166,7 +166,7 @@ module Aspose
           end
 
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
           valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
 
           if valid_output.blank?
@@ -192,7 +192,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename + '/drawingObjects'
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
           stream_hash = JSON.parse(response_stream)
 

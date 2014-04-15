@@ -28,7 +28,7 @@ module Aspose
               str_uri += '&storage=' + storage_name
             end
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -69,7 +69,7 @@ module Aspose
             end
         
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri) 
-            response_stream = RestClient.post(str_signed_uri, '', {:accept=>'application/json'})
+            response_stream = ::RestClient.post(str_signed_uri, '', {:accept=>'application/json'})
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
@@ -109,7 +109,7 @@ module Aspose
             end
 
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -142,7 +142,7 @@ module Aspose
             end
         
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.delete(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.delete(str_signed_uri, {:accept=>'application/json'})
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
@@ -177,7 +177,7 @@ module Aspose
             str_uri = $product_uri + '/slides/' + @filename + '/documentProperties'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
         
-            response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
+            response_stream = ::RestClient.get(signed_str_uri,{:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -213,7 +213,7 @@ module Aspose
             str_uri = $product_uri + '/slides/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
             
-            response_stream = RestClient.get(signed_str_uri,{:accept=>'application/json'})
+            response_stream = ::RestClient.get(signed_str_uri,{:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -257,7 +257,7 @@ module Aspose
             str_uri = $product_uri + '/slides/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
         
-            response_stream = RestClient.put(signed_str_uri,json_data,{:accept=>'application/json'})
+            response_stream = ::RestClient.put(signed_str_uri,json_data,{:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -289,7 +289,7 @@ module Aspose
             str_uri = $product_uri + '/slides/' + @filename + '/documentProperties'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
         
-            response_stream = RestClient.delete(signed_str_uri,{:accept=>'application/json'})
+            response_stream = ::RestClient.delete(signed_str_uri,{:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -324,7 +324,7 @@ module Aspose
         
             str_uri = $product_uri + '/slides/' + @filename + '/documentProperties/' + property_name
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response_stream = RestClient.delete(signed_str_uri,{:accept=>'application/json'})
+            response_stream = ::RestClient.delete(signed_str_uri,{:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -364,7 +364,7 @@ module Aspose
         
             str_uri = $product_uri + '/slides/' + @filename + '/documentProperties'
             signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response_stream = RestClient.put(signed_str_uri,json_data,{:accept=>'application/json'})
+            response_stream = ::RestClient.put(signed_str_uri,json_data,{:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -415,7 +415,7 @@ module Aspose
               str_uri += '&storage=' + storage_name
             end
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response_stream = RestClient.get(str_signed_uri,{:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri,{:accept=>'application/json'})
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
             if valid_output == ''                              
               output_path = output_path + Aspose::Cloud::Common::Utils.get_filename(@filename) + '.' + output_format
@@ -464,7 +464,7 @@ module Aspose
         
             str_uri = $product_uri + '/slides/'+@filename+'/slides/'+slide_number.to_s+'?format=' + output_format
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response_stream = RestClient.get(str_signed_uri,{:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri,{:accept=>'application/json'})
         
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)

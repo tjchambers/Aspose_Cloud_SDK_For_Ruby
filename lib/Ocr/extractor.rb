@@ -21,7 +21,7 @@ module Aspose
           
               signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-              response = RestClient.get(signed_uri, :accept=> 'application/json')
+              response = ::RestClient.get(signed_uri, :accept=> 'application/json')
               json = JSON.parse(response)
               return json         
             rescue Exception=>e
@@ -40,7 +40,7 @@ module Aspose
           
               signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
         
-              response = RestClient.get(signed_uri, :accept=> 'application/json')
+              response = ::RestClient.get(signed_uri, :accept=> 'application/json')
               json = JSON.parse(response)
               return json         
             rescue Exception=>e
@@ -52,7 +52,7 @@ module Aspose
             begin
               str_uri = $product_uri + '/ocr/'	+ image_file_name + '/recognize?useDefaultDictionaries=true'
               signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-              response = RestClient.get(signed_uri, :accept=> 'application/json')
+              response = ::RestClient.get(signed_uri, :accept=> 'application/json')
               json = JSON.parse(response)
               return json         
             rescue Exception=>e
@@ -74,7 +74,7 @@ module Aspose
 
               signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-              response = RestClient.get(signed_uri, :accept=> 'application/json')
+              response = ::RestClient.get(signed_uri, :accept=> 'application/json')
               json = JSON.parse(response)
               return json         
             rescue Exception=>e
@@ -86,7 +86,7 @@ module Aspose
             begin
               str_uri = $product_uri + '/ocr/recognize?language=' + language.to_s + '&useDefaultDictionaries=' + use_default_dictionaries.to_s
               signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-              response = RestClient.post(signed_uri,stream, :accept=> 'application/json')
+              response = ::RestClient.post(signed_uri,stream, :accept=> 'application/json')
               json = JSON.parse(response)
               return json         
             rescue Exception=>e
@@ -102,7 +102,7 @@ module Aspose
             str_uri = $product_uri + '/ocr/recognize?language=' + language.to_s + '&useDefaultDictionaries=' + use_default_dictionaries.to_s
             file_stream = File.binread(local_file)
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.post(signed_uri,file_stream, :accept=> 'application/json')
+            response = ::RestClient.post(signed_uri,file_stream, :accept=> 'application/json')
             json = JSON.parse(response)
             return json         
           rescue Exception=>e
@@ -114,7 +114,7 @@ module Aspose
           begin
             str_uri = $product_uri + '/ocr/recognize?url=' + url + '&language=' + language + '&useDefaultDictionaries=' + use_default_dictionaries
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.post(signed_uri,:accept => 'application/json')
+            response = ::RestClient.post(signed_uri,:accept => 'application/json')
             json=JSON.parse(response)
             return json
           rescue Exception=>e

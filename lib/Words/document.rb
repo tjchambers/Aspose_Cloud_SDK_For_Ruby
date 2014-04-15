@@ -36,7 +36,7 @@ module Aspose
 
           json_data = JSON.generate({'DocumentEntries' => objs})
 
-          response_stream = RestClient.post(signed_str_uri, json_data, {:content_type => :json})
+          response_stream = ::RestClient.post(signed_str_uri, json_data, {:content_type => :json})
 
           valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
 
@@ -58,7 +58,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
           stream_hash = JSON.parse(response_stream)
           stream_hash['Code'] == 200 ? stream_hash['Document'] : false
@@ -75,7 +75,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
           stream_hash = JSON.parse(response_stream)
           stream_hash['Code'] == 200 ? stream_hash['DocumentProperty'] : false
@@ -97,7 +97,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.put(signed_str_uri, json_data, {:content_type => :json})
+          response_stream = ::RestClient.put(signed_str_uri, json_data, {:content_type => :json})
 
           xmldoc = REXML::Document.new(response_stream)
 
@@ -120,7 +120,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename + '/documentProperties/' + property_name
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.delete(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.delete(signed_str_uri, {:accept => 'application/json'})
           JSON.parse(response_stream)['Code'] == 200
         end
 
@@ -132,7 +132,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename + '/documentProperties'
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
 
           stream_hash = JSON.parse(response_stream)
 

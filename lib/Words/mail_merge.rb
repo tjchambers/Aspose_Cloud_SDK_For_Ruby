@@ -25,7 +25,7 @@ module Aspose
           str_uri = $product_uri + '/words/' + @filename + '/executeMailMerge'
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-          response_stream = RestClient.post(signed_str_uri, str_xml, {:accept => :json})
+          response_stream = ::RestClient.post(signed_str_uri, str_xml, {:accept => :json})
           stream_hash = JSON.parse(response_stream)
 
           valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
@@ -54,7 +54,7 @@ module Aspose
 
           str_uri = $product_uri + '/words/' + @filename + '/executeMailMerge?withRegions=true'
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-          response_stream = RestClient.post(signed_str_uri, str_xml, {:accept => :json})
+          response_stream = ::RestClient.post(signed_str_uri, str_xml, {:accept => :json})
           stream_hash = JSON.parse(response_stream)
           valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
 
@@ -80,7 +80,7 @@ module Aspose
 
           str_uri = $product_uri + '/words/' + @filename + '/executeTemplate'
           signed_str_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-          response_stream = RestClient.post(signed_str_uri, str_xml, {:accept => :json})
+          response_stream = ::RestClient.post(signed_str_uri, str_xml, {:accept => :json})
           stream_hash = JSON.parse(response_stream)
           valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
 

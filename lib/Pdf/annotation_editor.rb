@@ -25,7 +25,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/pages/' + page_number.to_s + '/annotations'
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -60,7 +60,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/pages/' + page_number.to_s + '/annotations/' + annotation_index.to_s
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -122,7 +122,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/bookmarks'
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)  
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -153,7 +153,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/bookmarks/' + parent.to_s + '/bookmarks'
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -184,7 +184,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/bookmarks/' + bookmark_index.to_s
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -220,7 +220,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/bookmarks/' + parent_index.to_s + '/bookmarks/' + child_index.to_s
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -279,7 +279,7 @@ module Aspose
             str_uri = $product_uri + '/pdf/' + @filename + '/attachments'
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
 
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -310,7 +310,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/attachments/' + attachment_index.to_s
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -375,7 +375,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/attachments/' + attachment_index.to_s + '/download'
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
@@ -412,7 +412,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/pages/' + page_number.to_s + '/links'
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -447,7 +447,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/pages/' + page_number.to_s + '/links/' + link_index.to_s
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         
@@ -514,7 +514,7 @@ module Aspose
         
             str_uri = $product_uri + '/pdf/' + @filename + '/bookmarks/' + bookmark_index.to_s
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})
         
             stream_hash = JSON.parse(response_stream)
         

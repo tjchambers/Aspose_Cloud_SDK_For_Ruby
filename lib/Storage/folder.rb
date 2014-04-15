@@ -32,7 +32,7 @@ module Aspose
           str_url = @str_uri_folder + remote_folder_path
 
           signed_uri = Aspose::Cloud::Common::Utils.sign(str_url)
-          response = RestClient.get(signed_uri, :accept => 'application/json')
+          response = ::RestClient.get(signed_uri, :accept => 'application/json')
 
           JSON.parse(response)['Files']
 
@@ -44,7 +44,7 @@ module Aspose
           #        urlFile = $product_uri + '/storage/folder/' + remoteFolderPath
           #      end
           #      signedURL = Aspose::Cloud::Common::Utils.sign(urlFolder)
-          #      response = RestClient.get(signedURL, :accept => 'application/json')
+          #      response = ::RestClient.get(signedURL, :accept => 'application/json')
           #      result = JSON.parse(response.body)
           #      apps = Array.new(result['Files'].size)
           #
@@ -62,7 +62,7 @@ module Aspose
 
           signed_str_uri = build_file_uri(file_name, storage_name)
 
-          response_stream = RestClient.get(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.get(signed_str_uri, {:accept => 'application/json'})
           JSON.parse(response_stream)['FileExist']['IsExist']
 
         end
@@ -70,7 +70,7 @@ module Aspose
         def delete_file(file_name, storage_type = 'Aspose', storage_name = '')
 
           signed_str_uri = build_file_uri(file_name, storage_name)
-          response_stream = RestClient.delete(signed_str_uri, {:accept => 'application/json'})
+          response_stream = ::RestClient.delete(signed_str_uri, {:accept => 'application/json'})
           JSON.parse(response_stream)['Code'] == 200
         end
 
@@ -83,7 +83,7 @@ module Aspose
             folder_uri.query = URI.encode_www_form(storage_query)
           end
           signed_uri = Aspose::Cloud::Common::Utils.sign(folder_uri.to_s)
-          response = RestClient.put(signed_uri, nil, :accept => :json)
+          response = ::RestClient.put(signed_uri, nil, :accept => :json)
           JSON.parse(response)['Code'] == 200
         end
 
@@ -93,7 +93,7 @@ module Aspose
 
           str_uri = URI.join(@str_uri_folder, folder_name)
           signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-          response = RestClient.delete(signed_uri, :accept => 'application/json')
+          response = ::RestClient.delete(signed_uri, :accept => 'application/json')
           JSON.parse(response)['Code'] == 200
 
         end
@@ -104,7 +104,7 @@ module Aspose
           str_uri += append_storage(storage_name)
 
           signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-          response = RestClient.get(signed_uri, :accept => 'application/json')
+          response = ::RestClient.get(signed_uri, :accept => 'application/json')
           JSON.parse(response)['DiscUsage']
 
         end
@@ -112,7 +112,7 @@ module Aspose
         # Get file from Aspose server
         def get_file (file_name, storage_type = 'Aspose', storage_name = '')
           signed_uri = build_file_uri(file_name, storage_name)
-          RestClient.get(signed_uri, :accept => 'application/json')
+          ::RestClient.get(signed_uri, :accept => 'application/json')
         end
 
         private

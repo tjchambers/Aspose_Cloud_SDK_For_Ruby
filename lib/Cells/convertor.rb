@@ -27,7 +27,7 @@ module Aspose
             end  
             url_doc = $product_uri + '/cells/' + @filename + '?format=' + save_format
             signed_url = Aspose::Cloud::Common::Utils.sign(url_doc)
-            response = RestClient.get(signed_url, :accept => 'application/json')
+            response = ::RestClient.get(signed_url, :accept => 'application/json')
             validate_output = Aspose::Cloud::Common::Utils.validate_output(response)
             if validate_output!=nil || validate_output!=''
               output = $out_put_location + local_file + '.' + save_format
@@ -48,7 +48,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/worksheets/' + worksheet_name.to_s + '?format=' + image_format.to_s
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri,:accept => 'application/json')
+            response = ::RestClient.get(signed_uri,:accept => 'application/json')
             validate_output = Aspose::Cloud::Common::Utils.validate_output(response)
             if validate_output!=nil || validate_output!=''
               output = $out_put_location + worksheet_name + '.' + image_format
@@ -70,7 +70,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '?format=' + output_format.to_s
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri,:accept => 'application/json')
+            response = ::RestClient.get(signed_uri,:accept => 'application/json')
             validate_output = Aspose::Cloud::Common::Utils.validate_output(response)
             if validate_output==nil || validate_output==''
               output = $out_put_location + Aspose::Cloud::Common::Utils.get_filename(@filename) + '.' + output_format
@@ -97,7 +97,7 @@ module Aspose
             str_uri = $product_uri + '/cells/' + @filename + '/worksheets/' + 
               @worksheet_name + '?format=' + image_format.to_s
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri,:accept => 'application/json')
+            response = ::RestClient.get(signed_uri,:accept => 'application/json')
             v_output = Aspose::Cloud::Common::Utils.validate_output(response)
             if v_output==nil || v_output==''
               outputpath=$out_put_location + Aspose::Cloud::Common::Utils.get_filename(@filename) + '_' + @worksheet_name + '.' + image_format
@@ -124,7 +124,7 @@ module Aspose
               @worksheet_name + '/pictures/' + picture_index.to_s + '?format=' + image_format.to_s;
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
           
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
               
             v_output = Aspose::Cloud::Common::Utils.validate_output(response)
             if v_output==nil || v_output==''
@@ -150,7 +150,7 @@ module Aspose
             str_uri = $product_uri + '/cells/' + @filename + '/worksheets/' + 
               @worksheet_name + '/oleobjects/' + object_index.to_s + '?format=' + image_format.to_s;
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
               
             v_output = Aspose::Cloud::Common::Utils.validate_output(response)
             if v_output==nil || v_output==''
@@ -177,7 +177,7 @@ module Aspose
               @worksheet_name + '/charts/' + chart_index.to_s + '?format=' + image_format.to_s;
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
               
             v_output = Aspose::Cloud::Common::Utils.validate_output(response)
             if v_output==nil || v_output==''
@@ -204,7 +204,7 @@ module Aspose
               @worksheet_name + '/autoshapes/' + shape_index.to_s + '?format=' + image_format.to_s;
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
               
             v_output = Aspose::Cloud::Common::Utils.validate_output(response)
             if v_output==nil || v_output==''

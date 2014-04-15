@@ -28,7 +28,7 @@ module Aspose
             str_uri = $product_uri + '/pdf/' + @filename + '/pages/' + page_number.to_s + '/images'
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
         
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})        
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})        
             stream_hash = JSON.parse(response_stream)        
             return stream_hash['Images']['List'].length
         
@@ -66,7 +66,7 @@ module Aspose
             str_uri = $product_uri + '/pdf/' + @filename + '/pages/' + page_number.to_s + '/images/' + image_index.to_s + '?format=' + image_format
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})        
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})        
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
@@ -115,7 +115,7 @@ module Aspose
             str_uri = $product_uri + '/pdf/' + @filename + '/pages/' + page_number.to_s + '/images/' + image_index.to_s + '?format=' + image_format + '&width=' + width.to_s + '&height=' + height.to_s
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
         
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})        
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})        
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         

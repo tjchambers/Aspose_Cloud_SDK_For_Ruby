@@ -24,7 +24,7 @@ module Aspose
               str_uri += '&storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             return json['Images']['List'].count
           rescue Exception=>e
@@ -48,7 +48,7 @@ module Aspose
               str_uri += '&storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             return json['Images']['List'].count
           rescue Exception=>e
@@ -73,13 +73,13 @@ module Aspose
               str_uri += '&storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             shapes = Hash.new
             json['ShapeList']['ShapesLinks'].each { |item| 
           
               signed_uri = Aspose::Cloud::Common::Utils.sign(item['Uri']['Href'])
-              response = RestClient.get(signed_uri, :accept => 'application/json')
+              response = ::RestClient.get(signed_uri, :accept => 'application/json')
               shapes = JSON.parse(response)
             }
             return shapes
@@ -101,7 +101,7 @@ module Aspose
               str_uri += '?storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             return json['ColorScheme']
           rescue Exception=>e
@@ -122,7 +122,7 @@ module Aspose
               str_uri += '?storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             return json['FontScheme']
           rescue Exception=>e
@@ -144,7 +144,7 @@ module Aspose
               str_uri += '?storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             return json['FormatScheme']
           rescue Exception=>e
@@ -168,7 +168,7 @@ module Aspose
               str_uri += '&storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             return json['Placeholders']['PlaceholderLinks'].count
           rescue Exception=>e
@@ -194,7 +194,7 @@ module Aspose
               str_uri += '&storage=' + storage_name
             end
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             return json['Placeholder']
           rescue Exception=>e

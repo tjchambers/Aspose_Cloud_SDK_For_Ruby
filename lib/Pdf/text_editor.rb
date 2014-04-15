@@ -26,7 +26,7 @@ module Aspose
             end
         
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})  
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})  
         
             stream_hash = JSON.parse(response_stream)
             output_text = ''
@@ -63,7 +63,7 @@ module Aspose
         
         
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})  
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})  
         
             stream_hash = JSON.parse(response_stream)
         
@@ -92,7 +92,7 @@ module Aspose
        
             str_uri = $product_uri + '/pdf/' + @filename + '/pages/' + page_number.to_s + '/fragments'        
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})  
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})  
         
             stream_hash = JSON.parse(response_stream)
         
@@ -126,7 +126,7 @@ module Aspose
        
             str_uri = $product_uri + '/pdf/' + @filename + '/pages/' + page_number.to_s + '/fragments/' + fragment_number.to_s + (!segament_number.nil? ?  '/segments/' + segament_number.to_s : '') + '/textformat'
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})  
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})  
         
             stream_hash = JSON.parse(response_stream)
         
@@ -171,7 +171,7 @@ module Aspose
         
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
         
-            response_stream = RestClient.post(str_signed_uri,json_data,{:content_type=>'application/json',:accept=>'application/json'})  
+            response_stream = ::RestClient.post(str_signed_uri,json_data,{:content_type=>'application/json',:accept=>'application/json'})  
                
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
@@ -213,7 +213,7 @@ module Aspose
             str_uri = $product_uri + '/pdf/' + @filename + '/pages/' + page_number.to_s + '/fragments/' + fragment_number.to_s       
         
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})  
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})  
         
             stream_hash = JSON.parse(response_stream)
         

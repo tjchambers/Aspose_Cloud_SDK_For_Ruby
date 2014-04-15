@@ -24,7 +24,7 @@ module Aspose
             str_uri = "#{$product_uri}/slides/#{@filename}/slides/#{slide_number}?format=#{image_format}&width=#{width}&height=#{height}"
         
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})  
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})  
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         
@@ -53,7 +53,7 @@ module Aspose
             str_uri += "&storage=#{storage_name}&folder=#{folder}" unless storage_name.empty?
 
             str_signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response_stream = RestClient.get(str_signed_uri, {:accept=>'application/json'})  
+            response_stream = ::RestClient.get(str_signed_uri, {:accept=>'application/json'})  
         
             valid_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
         

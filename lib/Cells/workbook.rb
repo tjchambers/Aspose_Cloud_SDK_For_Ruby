@@ -13,7 +13,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/documentProperties'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             if json['Code'] == 200
               return json['DocumentProperties']['DocumentPropertyList']
@@ -37,7 +37,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/documentProperties/' + property_name
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             if json['Code'] == 200
               return json['DocumentProperty']
@@ -70,7 +70,7 @@ module Aspose
             put_data_arr['BuiltIn'] = 'False'
             json_data = put_data_arr.to_json
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.put(signed_uri,json_data, :accept => 'application/json')
+            response = ::RestClient.put(signed_uri,json_data, :accept => 'application/json')
             json = JSON.parse(response)
             if json['Code'] == 200
               return json['DocumentProperty']
@@ -90,7 +90,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/documentProperties'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.delete(signed_uri, :accept=>'application/json')
+            response = ::RestClient.delete(signed_uri, :accept=>'application/json')
             json = JSON.parse(response)
             if json['Code'] == 200
               return true
@@ -114,7 +114,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/documentProperties/' + property_name
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.delete(signed_uri, :accept => 'application/json')
+            response = ::RestClient.delete(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             if json['Code'] == 200
               return true
@@ -132,7 +132,7 @@ module Aspose
           begin
             str_uri = $product_uri + '/cells/' + @filename
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.put(signed_uri,'', :accept => 'application/json')
+            response = ::RestClient.put(signed_uri,'', :accept => 'application/json')
             json = JSON.parse(response)
             return json  
           rescue Exception=>e
@@ -148,7 +148,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '?templatefile=' + template_file_name
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.put(signed_uri,'', :accept => 'application/json')
+            response = ::RestClient.put(signed_uri,'', :accept => 'application/json')
             json = JSON.parse(response)
             return json  
           rescue Exception=>e
@@ -167,7 +167,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '?templatefile=' + template_file_name + '&dataFile=' + data_file
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.put(signed_uri,'', :accept => 'application/json')
+            response = ::RestClient.put(signed_uri,'', :accept => 'application/json')
             json = JSON.parse(response)
             return json  
           rescue Exception=>e
@@ -183,7 +183,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/smartmarker?xmlFile=' + data_file
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.post(signed_uri,'', :accept => 'application/json')
+            response = ::RestClient.post(signed_uri,'', :accept => 'application/json')
             json = JSON.parse(response)
             return json  
           rescue Exception=>e
@@ -199,7 +199,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/worksheets'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             return json['Worksheets']['WorksheetList'].size
           rescue Exception=>e
@@ -214,7 +214,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/names'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             return json['Names'].count
           rescue Exception=>e
@@ -229,7 +229,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/defaultStyle'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.get(signed_uri, :accept => 'application/json')
+            response = ::RestClient.get(signed_uri, :accept => 'application/json')
             json = JSON.parse(response)
             return json['Style']
           rescue Exception=>e
@@ -249,7 +249,7 @@ module Aspose
             json_data = fields_array.to_json
             str_uri = $product_uri + '/cells/' + @filename + '/encryption'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.post(signed_uri, json_data,:accept => 'application/json')
+            response = ::RestClient.post(signed_uri, json_data,:accept => 'application/json')
             json = JSON.parse(response)
             if json['Code']==200
               return true
@@ -319,7 +319,7 @@ module Aspose
             json_data = fields_array.to_json
             str_uri = $product_uri + '/cells/' + @filename + '/writeProtection'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.put(signed_uri, json_data,:accept => 'application/json')
+            response = ::RestClient.put(signed_uri, json_data,:accept => 'application/json')
             json = JSON.parse(response)
             if json['Code']==200
               return true
@@ -341,7 +341,7 @@ module Aspose
             json_data = fields_array.to_json
             str_uri = $product_uri + '/cells/' + @filename + '/writeProtection'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.delete(signed_uri,json_data, json_data,:accept => 'application/json')
+            response = ::RestClient.delete(signed_uri,json_data, json_data,:accept => 'application/json')
             json = JSON.parse(response)
             if json['Code']==200
               return true
@@ -364,7 +364,7 @@ module Aspose
             json_data = fields_array.to_json
             str_uri = $product_uri + '/cells/' + @filename + '/encryption'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.delete(signed_uri,json_data,:accept => 'application/json')
+            response = ::RestClient.delete(signed_uri,json_data,:accept => 'application/json')
             json = JSON.parse(response)
             if json['Code']==200
               return true
@@ -383,7 +383,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/worksheets/' + worksheet_name
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.put(signed_uri, '',:accept => 'application/json')
+            response = ::RestClient.put(signed_uri, '',:accept => 'application/json')
             json = JSON.parse(response)
             if json['Code']==201
               return true
@@ -402,7 +402,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/worksheets/' + worksheet_name
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.delete(signed_uri,:accept => 'application/json')
+            response = ::RestClient.delete(signed_uri,:accept => 'application/json')
             json = JSON.parse(response)
             if json['Code']==200
               return true
@@ -421,7 +421,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/merge?mergeWith='  + merge_file_name
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
-            response = RestClient.post(signed_uri,'',:accept => 'application/json')
+            response = ::RestClient.post(signed_uri,'',:accept => 'application/json')
             json = JSON.parse(response)
             if json['Code']==200
               return true

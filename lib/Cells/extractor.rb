@@ -22,7 +22,7 @@ module Aspose
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
             #Send request and receive response stream
-            response_stream = RestClient.get signed_uri, {:accept=>'application/json'}
+            response_stream = ::RestClient.get signed_uri, {:accept=>'application/json'}
 
             #Validate output
             v_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
@@ -58,7 +58,7 @@ module Aspose
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
             #Send request and receive response stream
-            response_stream = RestClient.get signed_uri, {:accept=>'application/json'}
+            response_stream = ::RestClient.get signed_uri, {:accept=>'application/json'}
 
             #Validate output
             v_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
@@ -94,7 +94,7 @@ module Aspose
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
             #Send request and receive response stream
-            response_stream = RestClient.get signed_uri, {:accept=>'application/json'}
+            response_stream = ::RestClient.get signed_uri, {:accept=>'application/json'}
 
             #Validate output
             v_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)
@@ -130,7 +130,7 @@ module Aspose
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
 
             #Send request and receive response stream
-            response_stream = RestClient.get signed_uri, {:accept=>'application/json'}
+            response_stream = ::RestClient.get signed_uri, {:accept=>'application/json'}
 
             #Validate output
             v_output = Aspose::Cloud::Common::Utils.validate_output(response_stream)

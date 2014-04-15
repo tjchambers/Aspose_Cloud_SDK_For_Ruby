@@ -29,7 +29,7 @@ module Aspose
               '&lowerRightColumn=' + lower_right_column.to_s
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
           
-            response = RestClient.put signed_uri,'', {:accept => 'application/json'}
+            response = ::RestClient.put signed_uri,'', {:accept => 'application/json'}
             v_output = Aspose::Cloud::Common::Utils.validate_output(response)
             if v_output==nil || v_output==''
               folder = Aspose::Cloud::AsposeStorage::Folder.new
@@ -59,7 +59,7 @@ module Aspose
             str_uri = $product_uri + '/cells/' + @filename + '/worksheets/' + @worksheet_name + '/charts/' + chart_index.to_s
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)
           
-            response = RestClient.delete signed_uri, {:accept => 'application/json'}
+            response = ::RestClient.delete signed_uri, {:accept => 'application/json'}
             v_output = Aspose::Cloud::Common::Utils.validate_output(response)
             if v_output==nil || v_output==''
               folder = Aspose::Cloud::AsposeStorage::Folder.new
@@ -88,7 +88,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/worksheets/' + @worksheet_name + '/charts/' + chart_index.to_s + '/chartArea'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)         
-            response = RestClient.get signed_uri, {:accept => 'application/json'}
+            response = ::RestClient.get signed_uri, {:accept => 'application/json'}
             json = JSON.parse(response)
             return json['ChartArea']
           rescue Exception=>e
@@ -109,7 +109,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/worksheets/' + @worksheet_name + '/charts/' + chart_index.to_s + '/chartArea/fillFormat'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)    
-            response = RestClient.get signed_uri, {:accept => 'application/json'}
+            response = ::RestClient.get signed_uri, {:accept => 'application/json'}
             json = JSON.parse(response)
             return json['FillFormat']
           rescue Exception=>e
@@ -130,7 +130,7 @@ module Aspose
             end
             str_uri = $product_uri + '/cells/' + @filename + '/worksheets/' + @worksheet_name + '/charts/' + chart_index.to_s + '/chartArea/border'
             signed_uri = Aspose::Cloud::Common::Utils.sign(str_uri)        
-            response = RestClient.get signed_uri, {:accept => 'application/json'}
+            response = ::RestClient.get signed_uri, {:accept => 'application/json'}
             json = JSON.parse(response)
             return json['Line']
           rescue Exception=>e
